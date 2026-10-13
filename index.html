@@ -1,31 +1,1641 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>даров</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Артём Ахтямов — кандидат в президенты школы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f0b06;
+    --bg-2: #140e07;
+    --card: #1a1208;
+    --card-2: #1f170c;
+    --line: #2a2014;
+    --line-2: #3d2e1a;
+    --text: #fceec9;
+    --muted: #b8a684;
+    --muted-2: #8a7a5c;
+    --gold: #febe54;
+    --gold-soft: #e89f2e;
+    --gold-dark: #a06a18;
+    --red: #c42b38;
+    --red-soft: #e04a56;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .font-title { font-family: 'Unbounded', sans-serif; }
+  .font-hand { font-family: 'Caveat', cursive; }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,11,6,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: 1140px; margin: 0 auto;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(254,190,84,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    flex-shrink: 0;
+    color: #1a1208;
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .logo-text b {
+    font-family: 'Unbounded'; font-size: 13px; font-weight: 800;
+    letter-spacing: 0.2px; color: var(--text);
+  }
+  .logo-text span {
+    font-size: 9.5px; color: var(--muted-2); font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .menu-btn {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: rgba(254,190,84,0.08);
+    border: 1px solid rgba(254,190,84,0.35);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all .25s;
+    flex-shrink: 0;
+    gap: 4px;
+  }
+  .menu-btn:hover {
+    background: rgba(254,190,84,0.18);
+    border-color: var(--gold);
+    box-shadow: 0 0 24px rgba(254,190,84,0.4);
+  }
+  .menu-btn .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--gold);
+    transition: transform .25s;
+  }
+
+  /* ===== БОКОВОЕ МЕНЮ ===== */
+  .side-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+    z-index: 150;
+  }
+  .side-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .side-menu {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 400px; max-width: 92vw;
+    background: linear-gradient(170deg, var(--card-2) 0%, var(--bg) 100%);
+    border-left: 1px solid var(--line-2);
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; flex-direction: column;
+    box-shadow: -20px 0 80px rgba(0,0,0,0.7);
+    overflow-y: auto;
+  }
+  .side-menu.open { transform: translateX(0); }
+
+  .side-menu::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 260px;
+    background: radial-gradient(ellipse at top, rgba(254,190,84,0.18), transparent 70%);
+    pointer-events: none;
+  }
+
+  .side-head {
+    padding: 26px 28px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 2;
+  }
+  .side-head-info { display: flex; flex-direction: column; gap: 4px; }
+  .side-title {
+    font-family: 'Unbounded'; font-size: 16px; font-weight: 800;
+    color: var(--text); letter-spacing: -0.3px;
+  }
+  .side-subtitle {
+    font-size: 11px; color: var(--muted-2);
+    font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+  .side-close {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(254,190,84,0.08);
+    border: 1px solid rgba(254,190,84,0.3);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .25s;
+    color: var(--gold);
+    font-size: 20px; line-height: 1;
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+  .side-close:hover {
+    background: rgba(254,190,84,0.2);
+    transform: rotate(90deg);
+  }
+
+  .side-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-2), transparent);
+    margin: 0 28px;
+    position: relative; z-index: 2;
+  }
+
+  .side-nav {
+    padding: 16px 16px 30px;
+    position: relative; z-index: 2;
+    list-style: none;
+  }
+  .side-nav li {
+    margin-bottom: 2px;
+  }
+  .side-nav a {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all .25s;
+    position: relative;
+  }
+  .side-nav .ico-nav {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(254,190,84,0.12), rgba(160,106,24,0.06));
+    border: 1px solid rgba(254,190,84,0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+    transition: all .3s;
+  }
+  .side-nav .ico-nav svg { width: 17px; height: 17px; }
+  .side-nav a:hover {
+    background: rgba(254,190,84,0.06);
+    color: var(--text);
+    transform: translateX(4px);
+  }
+  .side-nav a:hover .ico-nav {
+    background: linear-gradient(135deg, rgba(254,190,84,0.25), rgba(160,106,24,0.15));
+    border-color: var(--gold);
+    box-shadow: 0 0 16px rgba(254,190,84,0.4);
+  }
+
+  .side-nav .label { flex: 1; }
+  .side-nav .arrow {
+    color: var(--gold);
+    opacity: 0;
+    transition: all .25s;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .side-nav a:hover .arrow { opacity: 1; transform: translateX(3px); }
+
+  .side-foot {
+    margin-top: auto;
+    padding: 22px 28px 26px;
+    border-top: 1px solid var(--line);
+    position: relative; z-index: 2;
+    text-align: center;
+  }
+  .side-slogan {
+    font-family: 'Caveat'; font-size: 22px; font-weight: 700;
+    color: var(--gold); transform: rotate(-2deg);
+    display: inline-block; margin-bottom: 10px;
+  }
+  .side-copy {
+    font-size: 11px; color: var(--muted-2);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    isolation: isolate;
+  }
+  /* ✅ ФОТО ШКОЛЫ вместо CSS-заката */
+  .hero-photo-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('school.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  /* Затемнение поверх фото для читаемости */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(15,11,6,0.4) 0%, rgba(15,11,6,0.6) 45%, rgba(15,11,6,0.96) 100%),
+      linear-gradient(90deg, rgba(15,11,6,0.75) 0%, rgba(15,11,6,0.3) 55%, rgba(15,11,6,0.1) 100%);
+    z-index: 2;
+    transform: translateZ(0);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 100px 0 60px;
+  }
+
+  .election-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px 10px 14px;
+    background: rgba(254,190,84,0.15);
+    border: 1px solid rgba(254,190,84,0.5);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 28px;
+    box-shadow: 0 0 30px rgba(254,190,84,0.25);
+  }
+  .election-badge .badge-ico {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    color: #1a1208;
+    flex-shrink: 0;
+  }
+  .election-badge .badge-ico svg { width: 16px; height: 16px; }
+  .election-badge .badge-text {
+    display: flex; flex-direction: column; line-height: 1.2;
+  }
+  .election-badge .badge-text b {
+    font-family: 'Unbounded'; font-size: 12px; font-weight: 800;
+    color: var(--gold); letter-spacing: 0.3px;
+  }
+  .election-badge .badge-text span {
+    font-size: 11px; color: var(--muted);
+    font-weight: 600;
+  }
+
+  .hero-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 50px; align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10.5px; letter-spacing: 3.5px;
+    color: var(--text); text-transform: uppercase;
+    margin-bottom: 20px; font-weight: 700;
+    opacity: 0.9;
+  }
+  .hero-tag::before {
+    content: ''; width: 26px; height: 1.5px;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Unbounded'; font-size: clamp(38px, 5.8vw, 68px);
+    font-weight: 900; line-height: 1; letter-spacing: -2.5px;
+    color: var(--text); margin-bottom: 24px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--gold-soft) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 20px rgba(254,190,84,0.5));
+  }
+  .hero-slogan {
+    font-family: 'Unbounded'; font-size: clamp(17px, 2.2vw, 24px);
+    font-weight: 700; line-height: 1.35;
+    color: var(--gold); margin-bottom: 26px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+  }
+  .hero p {
+    font-size: 16px; color: var(--text);
+    max-width: 480px; margin-bottom: 32px; line-height: 1.75;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+  }
+  .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #1a1208; font-family: 'Manrope'; font-weight: 800;
+    padding: 13px 26px; border-radius: 30px; font-size: 14px;
+    border: none; cursor: pointer;
+    box-shadow: 0 8px 28px rgba(254,190,84,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
+    transition: transform .2s, box-shadow .25s;
+    letter-spacing: 0.2px;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(254,190,84,0.7), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .btn-outline {
+    background: rgba(15,11,6,0.6);
+    border: 1.5px solid rgba(254,190,84,0.7);
+    color: var(--gold);
+    box-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .btn-outline:hover {
+    background: rgba(254,190,84,0.2);
+    border-color: var(--gold);
+    box-shadow: 0 0 24px rgba(254,190,84,0.5);
+  }
+  .hero-signature {
+    font-family: 'Caveat'; font-size: 34px; font-weight: 700;
+    color: var(--text); transform: rotate(-3deg);
+    margin-top: 32px; display: inline-block;
+    position: relative;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+  }
+  .hero-signature::after {
+    content: ''; position: absolute; bottom: 2px; left: -8px; right: -8px;
+    height: 2px; background: var(--gold); border-radius: 2px;
+    box-shadow: 0 0 14px var(--gold);
+  }
+
+  .hero-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(160deg, rgba(31,23,12,0.85), rgba(15,11,6,0.95));
+    border: 1px solid rgba(254,190,84,0.4);
+    box-shadow:
+      0 40px 80px -30px rgba(0,0,0,0.9),
+      0 0 60px rgba(254,190,84,0.2),
+      inset 0 0 80px rgba(254,190,84,0.05);
+  }
+  .hero-photo::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(254,190,84,0.3), transparent 55%),
+      radial-gradient(circle at 70% 80%, rgba(160,106,24,0.5), transparent 60%);
+  }
+  .hero-photo-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; text-align: center; padding: 30px;
+    z-index: 2;
+  }
+  .hero-photo-inner svg { width: 80px; height: 80px; color: var(--gold); opacity: 0.6; }
+  .hero-photo-inner span {
+    font-size: 12px; color: var(--text);
+    font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    padding: 80px 0;
+    position: relative; z-index: 2;
+    border-top: 1px solid var(--line);
+  }
+  .section:first-of-type { border-top: none; }
+  .section-label {
+    font-family: 'Unbounded'; font-size: 10.5px; font-weight: 800;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; width: 22px; height: 1.5px; background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+  }
+  .section-heading {
+    font-family: 'Unbounded'; font-size: clamp(24px, 3.4vw, 36px);
+    font-weight: 800; letter-spacing: -1.2px;
+    margin-bottom: 16px; color: var(--text);
+    line-height: 1.15;
+  }
+  .section-sub {
+    color: var(--muted); font-size: 16px;
+    margin-bottom: 46px; max-width: 620px; line-height: 1.7;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr 0.85fr;
+    gap: 32px;
+  }
+  .info-list { list-style: none; }
+  .info-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list .ico {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(254,190,84,0.15), rgba(160,106,24,0.08));
+    border: 1px solid rgba(254,190,84,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+  }
+  .info-list .ico svg { width: 19px; height: 19px; }
+  .info-list b {
+    display: block; font-size: 11px; color: var(--muted-2);
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+    margin-bottom: 3px;
+  }
+  .info-list span { font-size: 14.5px; color: var(--text); font-weight: 600; line-height: 1.5; }
+
+  .about-text h3 {
+    font-family: 'Unbounded'; font-size: 18px; font-weight: 800;
+    margin-bottom: 18px; letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .about-text p {
+    color: var(--muted); font-size: 15px;
+    line-height: 1.8; margin-bottom: 16px;
+  }
+
+  .side-photo {
+    position: relative;
+    border-radius: 18px; overflow: hidden;
+    background: linear-gradient(160deg, #1f170c, #0f0b06);
+    border: 1px solid var(--line-2);
+    min-height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 30px;
+  }
+  .side-photo::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 100%, rgba(254,190,84,0.22), transparent 70%);
+  }
+  .side-photo svg { width: 60px; height: 60px; color: var(--gold); opacity: 0.4; position: relative; z-index: 1; }
+  .side-photo-hand {
+    position: absolute;
+    bottom: 24px; right: 24px;
+    font-family: 'Caveat'; font-size: 26px; font-weight: 700;
+    color: var(--text); transform: rotate(-4deg);
+    text-align: right; line-height: 1.05;
+    z-index: 2;
+  }
+  .side-photo-hand::after {
+    content: ''; display: block;
+    width: 100%; height: 2px;
+    background: var(--gold); margin-top: 4px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding-left: 30px; margin-top: 10px; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 8px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    box-shadow: 0 0 12px rgba(254,190,84,0.5);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 36px 34px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: ''; position: absolute;
+    left: -30px; top: 6px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 16px rgba(254,190,84,0.8);
+  }
+  .timeline-year {
+    font-family: 'Unbounded'; font-size: 12px; font-weight: 800;
+    color: var(--gold); letter-spacing: 2.5px;
+    margin-bottom: 8px;
+  }
+  .timeline-title {
+    font-family: 'Unbounded'; font-size: 16px; font-weight: 800;
+    color: var(--text); margin-bottom: 6px; letter-spacing: -0.2px;
+  }
+  .timeline-desc {
+    color: var(--muted); font-size: 14.5px; line-height: 1.7;
+  }
+
+  /* ===== VALUES ===== */
+  .values-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .value-card {
+    background: linear-gradient(160deg, var(--card), var(--bg-2));
+    border: 1px solid var(--line);
+    border-radius: 16px; padding: 26px 20px;
+    transition: transform .35s, border-color .35s, box-shadow .35s;
+    position: relative; overflow: hidden;
+  }
+  .value-card::before {
+    content: ''; position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(254,190,84,0.14), transparent 60%);
+    opacity: 0; transition: opacity .4s;
+    pointer-events: none;
+  }
+  .value-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(254,190,84,0.5);
+    box-shadow: 0 24px 50px -22px rgba(254,190,84,0.5);
+  }
+  .value-card:hover::before { opacity: 1; }
+  .value-card .ico {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(254,190,84,0.18), rgba(160,106,24,0.1));
+    border: 1px solid rgba(254,190,84,0.35);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    margin-bottom: 16px;
+    position: relative; z-index: 2;
+  }
+  .value-card .ico svg { width: 21px; height: 21px; }
+  .value-card h4 {
+    font-family: 'Unbounded'; font-size: 14px; font-weight: 800;
+    margin-bottom: 8px; color: var(--text); letter-spacing: -0.2px;
+    position: relative; z-index: 2;
+  }
+  .value-card p {
+    font-size: 12.5px; color: var(--muted); line-height: 1.6;
+    position: relative; z-index: 2;
+  }
+
+  /* ===== PROGRAM ===== */
+  .program-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .program-card {
+    background: linear-gradient(160deg, var(--card), var(--bg-2));
+    border: 1px solid var(--line);
+    border-radius: 20px; padding: 34px 28px;
+    position: relative; overflow: hidden;
+    transition: transform .35s, border-color .35s, box-shadow .35s;
+  }
+  .program-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0; transition: opacity .35s;
+    box-shadow: 0 0 20px var(--gold);
+  }
+  .program-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(254,190,84,0.5);
+    box-shadow: 0 28px 55px -24px rgba(254,190,84,0.5);
+  }
+  .program-card:hover::before { opacity: 1; }
+  .program-ico {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(254,190,84,0.18), rgba(160,106,24,0.1));
+    border: 1px solid rgba(254,190,84,0.35);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .program-ico svg { width: 24px; height: 24px; }
+  .program-card h3 {
+    font-family: 'Unbounded'; font-size: 17px; font-weight: 800;
+    margin-bottom: 12px; letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .program-card p {
+    color: var(--muted); font-size: 14px; line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .program-card .deadline {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 700;
+    color: var(--gold);
+    padding: 6px 12px; border-radius: 20px;
+    background: rgba(254,190,84,0.1);
+    border: 1px solid rgba(254,190,84,0.3);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 800px; }
+  .faq-item {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color .3s, background .3s;
+    background: linear-gradient(160deg, var(--card), var(--bg-2));
+  }
+  .faq-item.open {
+    border-color: rgba(254,190,84,0.5);
+    box-shadow: 0 0 30px -10px rgba(254,190,84,0.4);
+  }
+  .faq-q {
+    padding: 18px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; font-weight: 700; font-size: 15px;
+    transition: color .25s;
+    gap: 16px;
+    color: var(--text);
+  }
+  .faq-q:hover { color: var(--gold); }
+  .faq-item.open .faq-q { color: var(--gold); }
+  .faq-toggle {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(254,190,84,0.12);
+    border: 1px solid rgba(254,190,84,0.4);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform .3s, background .3s;
+    color: var(--gold); font-weight: 800; font-size: 17px;
+    line-height: 1;
+  }
+  .faq-item.open .faq-toggle {
+    transform: rotate(45deg);
+    background: var(--gold); color: #1a1208;
+    box-shadow: 0 0 16px rgba(254,190,84,0.7);
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease;
+    color: var(--muted); font-size: 14px; line-height: 1.75;
+  }
+  .faq-a-inner { padding: 0 22px 20px; }
+  .faq-item.open .faq-a { max-height: 300px; }
+
+  /* ===== GAME ===== */
+  .game-section {
+    padding: 90px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+    background:
+      radial-gradient(900px 500px at 50% 30%, rgba(254,190,84,0.08), transparent 70%);
+    z-index: 2;
+  }
+  .game-header { text-align: center; margin-bottom: 44px; }
+  .game-header .section-label { justify-content: center; }
+  .game-header h2 {
+    font-family: 'Unbounded'; font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: 900; letter-spacing: -1.8px;
+    line-height: 1.1; margin: 12px 0 16px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .game-header p { color: var(--muted); font-size: 16px; max-width: 580px; margin: 0 auto; }
+  .game-rules {
+    display: flex; justify-content: center; gap: 26px;
+    margin-top: 26px; flex-wrap: wrap;
+  }
+  .game-rule {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13.5px; color: var(--muted); font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(254,190,84,0.05);
+    border: 1px solid var(--line-2);
+  }
+  .game-rule .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.friend { background: radial-gradient(circle, #ffe0a0, var(--gold)); box-shadow: 0 0 14px rgba(254,190,84,0.9); }
+  .dot.enemy { background: radial-gradient(circle, #b0b0c0, #606070); box-shadow: 0 0 14px rgba(120,120,140,0.6); }
+
+  .game-wrap { max-width: 700px; margin: 0 auto; }
+  .game-box {
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(254,190,84,0.12), transparent 70%),
+      linear-gradient(180deg, #0f0b06, #050302);
+    border: 1px solid var(--line-2);
+    border-radius: 22px;
+    overflow: hidden;
+    height: 540px;
+    box-shadow:
+      inset 0 0 100px rgba(0,0,0,0.7),
+      0 40px 80px -30px rgba(254,190,84,0.4);
+    user-select: none;
+    touch-action: none;
+  }
+  .game-box::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(254,190,84,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(254,190,84,0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
+  }
+  .game-start {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 30px; z-index: 3;
+    background: rgba(5,3,2,0.6);
+  }
+  .game-start h3 {
+    font-family: 'Unbounded'; font-size: 24px; font-weight: 800;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, var(--text), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .game-start p { color: var(--muted); margin-bottom: 26px; max-width: 420px; font-size: 14.5px; line-height: 1.7; }
+
+  .game-hud {
+    position: absolute; top: 18px; left: 18px; right: 18px;
+    display: flex; justify-content: space-between;
+    font-family: 'Unbounded'; font-weight: 800; font-size: 14px;
+    z-index: 4; pointer-events: none;
+  }
+  .game-hud span {
+    background: rgba(0,0,0,0.75);
+    padding: 8px 16px; border-radius: 30px;
+    border: 1px solid rgba(254,190,84,0.4);
+    box-shadow: 0 0 20px rgba(254,190,84,0.2);
+  }
+  .game-hud .score { color: var(--gold); }
+  .game-hud .timer { color: var(--text); }
+
+  .ball {
+    position: absolute;
+    width: 66px; height: 66px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Unbounded'; font-size: 18px; font-weight: 900;
+    color: #1a1208;
+    will-change: transform;
+    z-index: 2;
+  }
+  .ball.friend {
+    background: radial-gradient(circle at 35% 30%, #fff2d0, var(--gold) 60%, var(--gold-dark));
+    box-shadow: 0 0 24px rgba(254,190,84,0.85);
+    border: 2px solid rgba(255,255,255,0.55);
+    color: #5a3a10;
+  }
+  .ball.enemy {
+    background: radial-gradient(circle at 35% 30%, #e8e8f0, #a0a0b0 60%, #606070);
+    box-shadow: 0 0 18px rgba(160,160,176,0.5);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: #3a3a44;
+  }
+  .ball::after {
+    content: ''; position: absolute;
+    top: 12%; left: 20%;
+    width: 24%; height: 18%;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    filter: blur(2px);
+  }
+  .ball.captured {
+    animation: capture .35s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes capture {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.8; }
+    100% { transform: scale(0.2); opacity: 0; }
+  }
+  .ball.miss {
+    animation: miss .35s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes miss {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.6) translateY(-20px); opacity: 0; }
+  }
+
+  .bin {
+    position: absolute;
+    bottom: 18px;
+    width: 96px; height: 96px;
+    z-index: 3;
+    filter: drop-shadow(0 10px 28px rgba(254,190,84,0.7));
+    will-change: left;
+  }
+  .bin.hit { animation: bin-hit .25s ease-out; }
+  @keyframes bin-hit {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .bin.miss-shake { animation: bin-miss .3s ease-out; }
+  @keyframes bin-miss {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  .bin svg { width: 100%; height: 100%; }
+
+  .floating-point {
+    position: absolute;
+    font-family: 'Unbounded'; font-weight: 900;
+    font-size: 24px; pointer-events: none;
+    animation: float-up 1s ease-out forwards;
+    z-index: 5;
+  }
+  .floating-point.plus { color: var(--gold); text-shadow: 0 0 16px rgba(254,190,84,1); }
+  .floating-point.minus { color: #b0b0c0; text-shadow: 0 0 16px rgba(200,200,220,0.9); }
+  @keyframes float-up {
+    0% { opacity: 1; transform: translateY(0) scale(0.6); }
+    40% { opacity: 1; transform: translateY(-20px) scale(1.3); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1); }
+  }
+
+  .spark {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .spark.gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .spark.gray { background: #b0b0c0; box-shadow: 0 0 10px #b0b0c0; }
+
+  .game-over {
+    position: absolute; inset: 0;
+    background: rgba(5,3,2,0.96);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; z-index: 6; gap: 12px; padding: 30px;
+    animation: fadeIn .4s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .game-over h3 {
+    font-family: 'Unbounded'; font-size: 26px;
+    color: var(--gold); font-weight: 900;
+    text-shadow: 0 0 30px rgba(254,190,84,0.7);
+    letter-spacing: -0.5px;
+  }
+  .game-over .final-score {
+    font-family: 'Unbounded'; font-size: 64px; font-weight: 900;
+    background: linear-gradient(135deg, var(--text), var(--gold) 60%, var(--gold-soft));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1; margin: 6px 0;
+    filter: drop-shadow(0 0 24px rgba(254,190,84,0.6));
+  }
+  .game-over p { color: var(--muted); max-width: 400px; font-size: 14.5px; }
+  .game-over .record {
+    font-size: 12px; color: var(--gold); font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px;
+    background: rgba(254,190,84,0.1);
+    border: 1px solid rgba(254,190,84,0.35);
+    margin-top: 4px;
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--line);
+    background:
+      radial-gradient(1000px 500px at 50% 50%, rgba(254,190,84,0.12), transparent 70%);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(254,190,84,0.15) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Unbounded'; font-size: clamp(26px, 4.8vw, 50px);
+    font-weight: 900; letter-spacing: -2px;
+    line-height: 1.1; margin-bottom: 22px;
+    position: relative; z-index: 2;
+    color: var(--text);
+  }
+  .cta-section h2 .accent {
+    display: block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(254,190,84,0.5));
+  }
+  .cta-section .subtitle {
+    color: var(--muted); font-size: 16px; max-width: 600px;
+    margin: 0 auto; position: relative; z-index: 2;
+    line-height: 1.7;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 50px 0 30px;
+    background: linear-gradient(180deg, var(--bg), #050302);
+    position: relative; z-index: 2;
+  }
+  .footer-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-slogan {
+    font-family: 'Caveat'; font-size: 24px;
+    color: var(--text); transform: rotate(-2deg);
+    opacity: 0.85;
+  }
+  .footer-bottom {
+    margin-top: 30px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    text-align: center; font-size: 12.5px; color: var(--muted-2);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-photo { max-width: 320px; margin: 0 auto; aspect-ratio: 3 / 4; }
+    .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .program-grid { grid-template-columns: 1fr; }
+    .section { padding: 60px 0; }
+    .hero-content { padding: 70px 0 40px; }
+  }
+  @media (max-width: 520px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+    .program-card { padding: 28px 22px; }
+    .game-box { height: 480px; }
+    .ball { width: 54px; height: 54px; font-size: 15px; }
+    .bin { width: 80px; height: 80px; }
+    .game-over h3 { font-size: 22px; }
+    .game-over .final-score { font-size: 52px; }
+    .footer-inner { justify-content: center; text-align: center; }
+    .election-badge { padding: 8px 14px 8px 10px; }
+    .election-badge .badge-ico { width: 28px; height: 28px; }
+    .election-badge .badge-text b { font-size: 11px; }
+    .election-badge .badge-text span { font-size: 10px; }
+  }
+</style>
 </head>
 <body>
-  <h1>даровавася</h1>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+      </div>
+      <div class="logo-text">
+        <b>Артём Ахтямов</b>
+        <span>Наша сила — в людях</span>
+      </div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Меню">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </button>
+  </div>
+</header>
+
+<!-- SIDE MENU -->
+<div class="side-overlay" id="sideOverlay"></div>
+<aside class="side-menu" id="sideMenu">
+  <div class="side-head">
+    <div class="side-head-info">
+      <div class="side-title">Содержание</div>
+      <div class="side-subtitle">Разделы</div>
+    </div>
+    <button class="side-close" id="sideClose">×</button>
+  </div>
+  <div class="side-divider"></div>
+  <ul class="side-nav" id="sideNav">
+    <li>
+      <a href="#about">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <span class="label">Обо мне</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="#path">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+        <span class="label">Мой путь</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="#values">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5L12 2z"/></svg></span>
+        <span class="label">Ценности</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="#program">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <span class="label">Программа</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="#faq">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.4-1 .9-1 1.7v.5"/><path d="M12 17h.01"/></svg></span>
+        <span class="label">Частые вопросы</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="#game">
+        <span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.6L2 15a3 3 0 0 0 3 3c1 0 1.5-.5 2-1.5L8 15h8l1 1.5c.5 1 1 1.5 2 1.5a3 3 0 0 0 3-3l-.7-6.4A4 4 0 0 0 17.32 5z"/></svg></span>
+        <span class="label">Игра «Поймай голос»</span>
+        <span class="arrow">→</span>
+      </a>
+    </li>
+  </ul>
+  <div class="side-foot">
+    <div class="side-slogan">Вместе мы можем больше!</div>
+    <div class="side-copy">© 2025 Артём Ахтямов</div>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="election-badge">
+        <div class="badge-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
+        <div class="badge-text">
+          <b>Выборы 19 октября</b>
+          <span>МАОУ «СОШ №5»</span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="hero-tag">Кандидат в президенты школы</div>
+          <h1>Артём<br><span class="accent">Ахтямов</span></h1>
+          <div class="hero-slogan">«Сильное будущее начинается с нас»</div>
+          <p>Я иду в президенты, чтобы сделать нашу школу местом, куда хочется приходить. Не буду обещать невозможного — сделаю то, что действительно важно.</p>
+          <div class="hero-buttons">
+            <a href="#program" class="btn">Моя программа</a>
+            <a href="#game" class="btn btn-outline">Играть в игру</a>
+          </div>
+          <div class="hero-signature">Артём Ахтямов</div>
+        </div>
+        <div class="hero-photo">
+          <div class="hero-photo-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Фото<br>будет здесь</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-label">Обо мне</div>
+    <h2 class="section-heading">Немного фактов</h2>
+    <p class="section-sub">Чтобы вы лучше меня узнали перед выборами.</p>
+
+    <div class="about-grid">
+      <div>
+        <ul class="info-list">
+          <li>
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div><b>Возраст</b><span>15 лет</span></div>
+          </li>
+          <li>
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div><b>Учусь в</b><span>9 «В» классе</span></div>
+          </li>
+          <li>
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.3 5.5 21 7 14 2 9.3 9 9"/></svg></div>
+            <div><b>Опыт</b><span>Участник школьных мероприятий, волонтёр</span></div>
+          </li>
+          <li>
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            <div><b>Интересы</b><span>Технологии, спорт, саморазвитие</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about-text">
+        <h3>Почему я?</h3>
+        <p>Я знаю, что такое быть учеником. Я сам сталкивался с трудностями, видел, что в нашей школе не хватает перемен.</p>
+        <p>Я хочу быть тем, кто действительно слушает, слышит и действует.</p>
+        <p>У меня есть идеи, энергия и желание сделать нашу школу местом, где каждый чувствует себя частью большого и дружного коллектива.</p>
+      </div>
+
+      <div class="side-photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="side-photo-hand">Лучшие<br>перемены<br>впереди…</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATH -->
+<section class="section" id="path">
+  <div class="container">
+    <div class="section-label">Мой путь</div>
+    <h2 class="section-heading">Что я успел сделать</h2>
+    <p class="section-sub">Несколько лет активной школьной жизни.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-title">Пришёл в школьный актив</div>
+        <div class="timeline-desc">Начал помогать в организации мероприятий, познакомился с командой.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-title">Первый крупный проект</div>
+        <div class="timeline-desc">Организовал школьный турнир — собрал более 40 участников.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-title">Волонтёрство</div>
+        <div class="timeline-desc">Участвовал в городских и школьных волонтёрских акциях.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">Год активной работы</div>
+        <div class="timeline-desc">Помогал организовывать мероприятия, работал в команде, учился договариваться.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-title">Решение идти в президенты</div>
+        <div class="timeline-desc">Понял, что хочу менять школу к лучшему — и готов действовать.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section" id="values">
+  <div class="container">
+    <div class="section-label">Ценности</div>
+    <h2 class="section-heading">Мои принципы</h2>
+    <p class="section-sub">Пять основ, на которых будет строиться моя работа.</p>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Уважение</h4>
+        <p>К каждому ученику, независимо от мнения и взглядов.</p>
+      </div>
+      <div class="value-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></div>
+        <h4>Развитие</h4>
+        <p>Больше возможностей для учёбы, спорта и творчества.</p>
+      </div>
+      <div class="value-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Справедливость</h4>
+        <p>Равные условия для всех и открытый диалог.</p>
+      </div>
+      <div class="value-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Команда</h4>
+        <p>Решать проблемы вместе — значит добиваться большего.</p>
+      </div>
+      <div class="value-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.3 5.5 21 7 14 2 9.3 9 9"/></svg></div>
+        <h4>Современная школа</h4>
+        <p>Технологии, комфорт и интересная школьная жизнь.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="section" id="program">
+  <div class="container">
+    <div class="section-label">Программа</div>
+    <h2 class="section-heading">Что я обещаю сделать</h2>
+    <p class="section-sub">Я не буду обещать отменять домашку — это попросту невозможно. Но я обещаю сделать три конкретные вещи. Результаты — уже в первый месяц.</p>
+
+    <div class="program-grid">
+      <div class="program-card">
+        <div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Больше мероприятий</h3>
+        <p>Вместе с командой и учителями организую интересные события — от стендапов до киберспортивных турниров среди учеников.</p>
+        <span class="deadline">🎯 1-й месяц</span>
+      </div>
+      <div class="program-card">
+        <div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Совет старост</h3>
+        <p>Создам совет старост всех классов, чтобы вы могли доносить проблемы до администрации — например, о проблеме с учителем или предметом.</p>
+        <span class="deadline">🎯 1-й месяц</span>
+      </div>
+      <div class="program-card">
+        <div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+        <h3>Ящик идей</h3>
+        <p>Сделаю специальный ящик, куда вы сможете написать свою идею — которую мы в дальнейшем реализуем.</p>
+        <span class="deadline">🎯 1-й месяц</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-label">Вопросы</div>
+    <h2 class="section-heading">Частые вопросы</h2>
+    <p class="section-sub">Отвечаю на то, что спрашивают чаще всего.</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Ты правда сможешь что-то изменить?<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Да, потому что я не обещаю невозможного. Три конкретные вещи из моей программы реально сделать в первый месяц — я и моя команда готовы начать сразу.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Почему именно ты?<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Я сам ученик и понимаю проблемы изнутри. У меня есть опыт, команда и желание слушать и действовать.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Как ты будешь слушать учеников?<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Через совет старост и ящик идей. Любой ученик сможет предложить идею или рассказать о проблеме — мы это рассмотрим и решим.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что насчёт домашки?<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Домашку отменить нельзя — это честно. Зато можно сделать школьную жизнь интереснее и комфортнее. Именно этим я и займусь.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME -->
+<section class="game-section" id="game">
+  <div class="container">
+    <div class="game-header">
+      <div class="section-label">Мини-игра</div>
+      <h2>Поймай голос</h2>
+      <p>Управляй урной для голосования и лови шарики с кандидатами от нашей партии. Другие кандидаты — теряй очки!</p>
+      <div class="game-rules">
+        <div class="game-rule"><span class="dot friend"></span> Наш кандидат — +1 очко</div>
+        <div class="game-rule"><span class="dot enemy"></span> Другой кандидат — −1 очко и −1 секунда</div>
+      </div>
+    </div>
+    <div class="game-wrap">
+      <div class="game-box" id="gameBox">
+        <div class="game-start" id="gameStart">
+          <h3>Готов ловить голоса?</h3>
+          <p>Веди пальцем по экрану, чтобы двигать урну.<br>Собирай своих, избегай других кандидатов!</p>
+          <button class="btn" id="startBtn">▶ Начать игру</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Сделаем нашу школу <span class="accent">лучше, чем вчера!</span></h2>
+    <p class="subtitle">Все обещания из моей программы будут выполнены в первый месяц.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        </div>
+        <div class="logo-text">
+          <b>Артём Ахтямов</b>
+          <span>Наша сила — в людях</span>
+        </div>
+      </div>
+      <div class="footer-slogan">Вместе мы можем больше!</div>
+    </div>
+    <div class="footer-bottom">© 2025 Артём Ахтямов · МАОУ «СОШ №5» · Выборы 19 октября</div>
+  </div>
+</footer>
+
+<script>
+  /* ===== МЕНЮ-ТОЧКИ ===== */
+  const menuBtn = document.getElementById('menuBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const sideOverlay = document.getElementById('sideOverlay');
+  const sideClose = document.getElementById('sideClose');
+  const sideNav = document.getElementById('sideNav');
+
+  function openMenu() {
+    sideMenu.classList.add('open');
+    sideOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    sideMenu.classList.remove('open');
+    sideOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn.addEventListener('click', () => {
+    if (sideMenu.classList.contains('open')) closeMenu();
+    else openMenu();
+  });
+  sideClose.addEventListener('click', closeMenu);
+  sideOverlay.addEventListener('click', closeMenu);
+  sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  /* ===== FAQ ===== */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  /* ===== ИГРА ===== */
+  const gameBox = document.getElementById('gameBox');
+  const gameStart = document.getElementById('gameStart');
+  const startBtn = document.getElementById('startBtn');
+
+  let running = false;
+  let score = 0;
+  let timeLeft = 45;
+  let binX = 0;
+  let binTargetX = 0;
+  let bin;
+  let hud;
+  let spawnTimer, countdownTimer, animFrame;
+  let lastTime = 0;
+  let spawnInterval = 800;
+
+  const BIN_WIDTH = 96;
+  const BALL_SIZE = 66;
+  const MAX_BALLS = 6;
+
+  const friends = ['А', 'Б', 'В'];
+  const enemies = ['X', 'Y', 'Z'];
+
+  let activeBalls = 0;
+
+  function startGame() {
+    score = 0;
+    timeLeft = 45;
+    running = true;
+    spawnInterval = 800;
+    activeBalls = 0;
+    gameStart.style.display = 'none';
+
+    hud = document.createElement('div');
+    hud.className = 'game-hud';
+    hud.innerHTML = `
+      <span class="score" id="score">🗳️ 0</span>
+      <span class="timer" id="timer">⏱ 45</span>
+    `;
+    gameBox.appendChild(hud);
+
+    bin = document.createElement('div');
+    bin.className = 'bin';
+    bin.innerHTML = `
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="binGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe0a0"/>
+            <stop offset="1" stop-color="#a06a18"/>
+          </linearGradient>
+          <linearGradient id="binGrad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#febe54"/>
+            <stop offset="1" stop-color="#7a5010"/>
+          </linearGradient>
+        </defs>
+        <rect x="15" y="35" width="70" height="55" rx="6" fill="url(#binGrad)" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/>
+        <rect x="10" y="28" width="80" height="12" rx="3" fill="url(#binGrad2)" stroke="#fff" stroke-width="2" stroke-opacity="0.6"/>
+        <rect x="44" y="45" width="12" height="6" rx="2" fill="#1a1208"/>
+        <rect x="40" y="60" width="20" height="20" rx="2" fill="rgba(255,255,255,0.25)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.8"/>
+        <path d="M47 68 L53 74 M53 68 L47 74" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.95"/>
+      </svg>
+    `;
+    gameBox.appendChild(bin);
+
+    binX = gameBox.clientWidth / 2 - BIN_WIDTH / 2;
+    binTargetX = binX;
+    bin.style.left = binX + 'px';
+
+    scheduleSpawn();
+
+    countdownTimer = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        const t = document.getElementById('timer');
+        if (t) t.textContent = '⏱ ' + timeLeft;
+        if (timeLeft <= 0) endGame();
+      }
+    }, 1000);
+
+    lastTime = performance.now();
+    function animate(now) {
+      if (!running) return;
+      const dt = Math.min(now - lastTime, 50) / 16.67;
+      lastTime = now;
+      binX += (binTargetX - binX) * 0.22 * dt;
+      binX = Math.max(0, Math.min(gameBox.clientWidth - BIN_WIDTH, binX));
+      bin.style.left = binX + 'px';
+      animFrame = requestAnimationFrame(animate);
+    }
+    animFrame = requestAnimationFrame(animate);
+
+    setupControls();
+  }
+
+  function scheduleSpawn() {
+    if (!running) return;
+    if (activeBalls < MAX_BALLS) spawnBall();
+    spawnTimer = setTimeout(scheduleSpawn, spawnInterval);
+    if (spawnInterval > 400) spawnInterval -= 12;
+  }
+
+  function spawnBall() {
+    if (!running) return;
+    const ball = document.createElement('div');
+    ball.className = 'ball';
+    const isFriend = Math.random() < 0.65;
+    const names = isFriend ? friends : enemies;
+    const name = names[Math.floor(Math.random() * names.length)];
+    ball.classList.add(isFriend ? 'friend' : 'enemy');
+    ball.textContent = name;
+
+    const maxX = gameBox.clientWidth - BALL_SIZE;
+    const x = Math.random() * maxX;
+    let y = -BALL_SIZE;
+    const speed = 1.8 + Math.random() * 1.2;
+
+    ball.style.left = x + 'px';
+    ball.style.top = y + 'px';
+    gameBox.appendChild(ball);
+    activeBalls++;
+
+    function fall() {
+      if (!running) { ball.remove(); activeBalls--; return; }
+      y += speed * 1.6;
+      ball.style.top = y + 'px';
+
+      const binTop = gameBox.clientHeight - 18 - BIN_WIDTH;
+      const binBottom = gameBox.clientHeight - 18;
+      const ballBottom = y + BALL_SIZE;
+      const ballCenterX = x + BALL_SIZE / 2;
+      const binCenterX = binX + BIN_WIDTH / 2;
+
+      if (ballBottom >= binTop && ballBottom <= binBottom + 20) {
+        if (Math.abs(ballCenterX - binCenterX) < BIN_WIDTH / 2 - 4) {
+          catchBall(ball, isFriend, x, y);
+          return;
+        }
+      }
+
+      if (y > gameBox.clientHeight) { ball.remove(); activeBalls--; return; }
+      requestAnimationFrame(fall);
+    }
+    requestAnimationFrame(fall);
+  }
+
+  function catchBall(ball, isFriend, x, y) {
+    ball.classList.add(isFriend ? 'captured' : 'miss');
+    setTimeout(() => { ball.remove(); activeBalls--; }, 400);
+
+    for (let i = 0; i < 4; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'spark ' + (isFriend ? 'gold' : 'gray');
+      spark.style.left = (x + BALL_SIZE / 2) + 'px';
+      spark.style.top = (y + BALL_SIZE / 2) + 'px';
+      const angle = (Math.PI * 2 * i) / 4;
+      const dist = 40 + Math.random() * 30;
+      spark.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0)`, opacity: 0 }
+      ], { duration: 500, easing: 'ease-out' });
+      gameBox.appendChild(spark);
+      setTimeout(() => spark.remove(), 500);
+    }
+
+    const point = document.createElement('div');
+    point.className = 'floating-point ' + (isFriend ? 'plus' : 'minus');
+    point.textContent = isFriend ? '+1' : '−1';
+    point.style.left = (x + 8) + 'px';
+    point.style.top = y + 'px';
+    gameBox.appendChild(point);
+    setTimeout(() => point.remove(), 1000);
+
+    if (bin) {
+      bin.classList.remove('hit', 'miss-shake');
+      void bin.offsetWidth;
+      bin.classList.add(isFriend ? 'hit' : 'miss-shake');
+    }
+
+    if (isFriend) {
+      score++;
+    } else {
+      score = Math.max(0, score - 1);
+      timeLeft = Math.max(0, timeLeft - 1);
+      const t = document.getElementById('timer');
+      if (t) t.textContent = '⏱ ' + timeLeft;
+      if (timeLeft <= 0) endGame();
+    }
+
+    const s = document.getElementById('score');
+    if (s) s.textContent = '🗳️ ' + score;
+  }
+
+  function setupControls() {
+    function move(e) {
+      if (!running) return;
+      let clientX;
+      if (e.touches) clientX = e.touches[0].clientX;
+      else clientX = e.clientX;
+      const rect = gameBox.getBoundingClientRect();
+      const x = clientX - rect.left;
+      binTargetX = x - BIN_WIDTH / 2;
+    }
+    gameBox.addEventListener('touchmove', e => { e.preventDefault(); move(e); }, { passive: false });
+    gameBox.addEventListener('touchstart', e => { e.preventDefault(); move(e); }, { passive: false });
+    gameBox.addEventListener('mousemove', move);
+  }
+
+  function endGame() {
+    running = false;
+    clearTimeout(spawnTimer);
+    clearInterval(countdownTimer);
+    cancelAnimationFrame(animFrame);
+
+    gameBox.querySelectorAll('.ball, .game-hud, .floating-point, .spark').forEach(el => el.remove());
+    if (bin) bin.remove();
+    activeBalls = 0;
+
+    const finalScore = score;
+    const currentRecord = parseInt(localStorage.getItem('gameRecord') || '0');
+    const isNewRecord = finalScore > currentRecord;
+    if (isNewRecord) localStorage.setItem('gameRecord', finalScore);
+
+    let message = '';
+    if (finalScore >= 25) message = 'Ты настоящий лидер! 🏆';
+    else if (finalScore >= 15) message = 'Отличный результат! 💪';
+    else if (finalScore >= 8) message = 'Хорошо, но можно лучше! 👍';
+    else message = 'Попробуй ещё раз! 🚀';
+
+    const over = document.createElement('div');
+    over.className = 'game-over';
+    over.innerHTML = `
+      <h3>Время вышло!</h3>
+      <div class="final-score">${finalScore}</div>
+      <p>${message}</p>
+      ${isNewRecord ? '<div class="record">🏆 Новый рекорд!</div>' : `<div class="record">Рекорд: ${Math.max(currentRecord, finalScore)}</div>`}
+      <button class="btn" id="restartBtn" style="margin-top: 14px;">🔄 Играть снова</button>
+    `;
+    gameBox.appendChild(over);
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      over.remove();
+      startGame();
+    });
+  }
+
+  startBtn.addEventListener('click', startGame);
+</script>
+
 </body>
-</html>
+  </html>
