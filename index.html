@@ -51,20 +51,14 @@
     width: 38px; height: 38px; border-radius: 10px;
     background: linear-gradient(135deg, var(--gold), var(--gold-dark));
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 24px rgba(254,190,84,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    box-shadow: 0 0 24px rgba(254,190,84,0.5);
     flex-shrink: 0;
     color: #1a1208;
   }
   .logo-mark svg { width: 20px; height: 20px; }
   .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
-  .logo-text b {
-    font-family: 'Unbounded'; font-size: 13px; font-weight: 800;
-    color: var(--text);
-  }
-  .logo-text span {
-    font-size: 9.5px; color: var(--muted-2); font-weight: 600;
-    letter-spacing: 0.5px;
-  }
+  .logo-text b { font-family: 'Unbounded'; font-size: 13px; font-weight: 800; }
+  .logo-text span { font-size: 9.5px; color: var(--muted-2); font-weight: 600; letter-spacing: 0.5px; }
 
   .menu-btn {
     width: 46px; height: 46px;
@@ -77,15 +71,8 @@
     flex-shrink: 0;
     gap: 4px;
   }
-  .menu-btn:hover {
-    background: rgba(254,190,84,0.18);
-    border-color: var(--gold);
-    box-shadow: 0 0 24px rgba(254,190,84,0.4);
-  }
-  .menu-btn .dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--gold);
-  }
+  .menu-btn:hover { background: rgba(254,190,84,0.18); border-color: var(--gold); }
+  .menu-btn .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
 
   .side-overlay {
     position: fixed; inset: 0;
@@ -120,87 +107,49 @@
     display: flex; align-items: center; justify-content: space-between;
     position: relative; z-index: 2;
   }
-  .side-title {
-    font-family: 'Unbounded'; font-size: 16px; font-weight: 800;
-    color: var(--text);
-  }
-  .side-subtitle {
-    font-size: 11px; color: var(--muted-2);
-    font-weight: 600; letter-spacing: 2.5px;
-    text-transform: uppercase;
-  }
+  .side-title { font-family: 'Unbounded'; font-size: 16px; font-weight: 800; }
+  .side-subtitle { font-size: 11px; color: var(--muted-2); font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; }
   .side-close {
     width: 36px; height: 36px; border-radius: 50%;
     background: rgba(254,190,84,0.08);
     border: 1px solid rgba(254,190,84,0.3);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: all .25s;
-    color: var(--gold);
-    font-size: 20px; line-height: 1;
-    font-weight: 300;
+    color: var(--gold); font-size: 20px; font-weight: 300;
   }
-  .side-close:hover {
-    background: rgba(254,190,84,0.2);
-    transform: rotate(90deg);
-  }
-  .side-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--line-2), transparent);
-    margin: 0 28px;
-  }
-  .side-nav {
-    padding: 16px 16px 30px;
-    list-style: none;
-    position: relative; z-index: 2;
-  }
+  .side-close:hover { background: rgba(254,190,84,0.2); transform: rotate(90deg); }
+  .side-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--line-2), transparent); margin: 0 28px; }
+  .side-nav { padding: 16px 16px 30px; list-style: none; position: relative; z-index: 2; }
   .side-nav li { margin-bottom: 2px; }
   .side-nav a {
     display: flex; align-items: center; gap: 14px;
     padding: 14px 16px;
-    font-size: 15px;
-    color: var(--muted);
-    font-weight: 600;
-    border-radius: 12px;
-    transition: all .25s;
+    font-size: 15px; color: var(--muted); font-weight: 600;
+    border-radius: 12px; transition: all .25s;
   }
   .side-nav .ico-nav {
-    width: 36px; height: 36px;
-    border-radius: 10px;
+    width: 36px; height: 36px; border-radius: 10px;
     background: linear-gradient(135deg, rgba(254,190,84,0.12), rgba(160,106,24,0.06));
     border: 1px solid rgba(254,190,84,0.25);
     display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    flex-shrink: 0;
+    color: var(--gold); flex-shrink: 0;
   }
   .side-nav .ico-nav svg { width: 17px; height: 17px; }
-  .side-nav a:hover {
-    background: rgba(254,190,84,0.06);
-    color: var(--text);
-    transform: translateX(4px);
-  }
+  .side-nav a:hover { background: rgba(254,190,84,0.06); color: var(--text); transform: translateX(4px); }
   .side-nav .label { flex: 1; }
-  .side-nav .arrow {
-    color: var(--gold);
-    opacity: 0;
-    transition: all .25s;
-    font-weight: 700;
-  }
+  .side-nav .arrow { color: var(--gold); opacity: 0; transition: all .25s; font-weight: 700; }
   .side-nav a:hover .arrow { opacity: 1; }
   .side-foot {
-    margin-top: auto;
-    padding: 22px 28px 26px;
+    margin-top: auto; padding: 22px 28px 26px;
     border-top: 1px solid var(--line);
-    text-align: center;
-    position: relative; z-index: 2;
+    text-align: center; position: relative; z-index: 2;
   }
   .side-slogan {
     font-family: 'Caveat'; font-size: 22px; font-weight: 700;
     color: var(--gold); transform: rotate(-2deg);
     display: inline-block; margin-bottom: 10px;
   }
-  .side-copy {
-    font-size: 11px; color: var(--muted-2);
-  }
+  .side-copy { font-size: 11px; color: var(--muted-2); }
 
   .hero {
     position: relative;
@@ -211,8 +160,7 @@
     isolation: isolate;
   }
   .hero-photo-bg {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image: url('school.jpeg');
     background-size: cover;
     background-position: center;
@@ -220,22 +168,16 @@
     transform: translateZ(0);
   }
   .hero-overlay {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
       linear-gradient(180deg, rgba(15,11,6,0.5) 0%, rgba(15,11,6,0.7) 45%, rgba(15,11,6,0.97) 100%),
       linear-gradient(90deg, rgba(15,11,6,0.85) 0%, rgba(15,11,6,0.4) 55%, rgba(15,11,6,0.15) 100%);
     z-index: 2;
   }
-  .hero-content {
-    position: relative;
-    z-index: 3;
-    padding: 100px 0 60px;
-  }
+  .hero-content { position: relative; z-index: 3; padding: 100px 0 60px; }
+
   .election-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+    display: inline-flex; align-items: center; gap: 12px;
     padding: 10px 18px 10px 14px;
     background: rgba(254,190,84,0.12);
     border: 1px solid rgba(254,190,84,0.5);
@@ -245,23 +187,17 @@
     box-shadow: 0 0 30px rgba(254,190,84,0.25);
   }
   .election-badge .badge-ico {
-    width: 32px; height: 32px;
-    border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background: linear-gradient(135deg, var(--gold), var(--gold-dark));
     display: flex; align-items: center; justify-content: center;
-    color: #1a1208;
-    flex-shrink: 0;
+    color: #1a1208; flex-shrink: 0;
   }
   .election-badge .badge-ico svg { width: 16px; height: 16px; }
   .election-badge .badge-text b {
     font-family: 'Unbounded'; font-size: 12px; font-weight: 800;
-    color: var(--gold); letter-spacing: 0.3px;
-    display: block;
+    color: var(--gold); display: block;
   }
-  .election-badge .badge-text span {
-    font-size: 11px; color: var(--muted);
-    font-weight: 600;
-  }
+  .election-badge .badge-text span { font-size: 11px; color: var(--muted); font-weight: 600; }
 
   .hero-grid {
     display: grid; grid-template-columns: 1.2fr 1fr;
@@ -273,11 +209,7 @@
     color: var(--text); text-transform: uppercase;
     margin-bottom: 20px; font-weight: 700;
   }
-  .hero-tag::before {
-    content: ''; width: 26px; height: 1.5px;
-    background: var(--gold);
-    box-shadow: 0 0 10px var(--gold);
-  }
+  .hero-tag::before { content: ''; width: 26px; height: 1.5px; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
   .hero h1 {
     font-family: 'Unbounded'; font-size: clamp(38px, 5.8vw, 68px);
     font-weight: 900; line-height: 1; letter-spacing: -2.5px;
@@ -288,7 +220,6 @@
     background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--gold-soft) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 20px rgba(254,190,84,0.5));
   }
   .hero-slogan {
     font-family: 'Unbounded'; font-size: clamp(17px, 2.2vw, 24px);
@@ -311,10 +242,7 @@
     box-shadow: 0 8px 28px rgba(254,190,84,0.5);
     transition: transform .2s, box-shadow .25s;
   }
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(254,190,84,0.7);
-  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(254,190,84,0.7); }
   .btn-outline {
     background: rgba(15,11,6,0.6);
     border: 1.5px solid rgba(254,190,84,0.7);
@@ -322,10 +250,7 @@
     box-shadow: none;
     backdrop-filter: blur(10px);
   }
-  .btn-outline:hover {
-    background: rgba(254,190,84,0.2);
-    border-color: var(--gold);
-  }
+  .btn-outline:hover { background: rgba(254,190,84,0.2); border-color: var(--gold); }
   .hero-signature {
     font-family: 'Caveat'; font-size: 34px; font-weight: 700;
     color: var(--text); transform: rotate(-3deg);
@@ -339,35 +264,16 @@
     box-shadow: 0 0 14px var(--gold);
   }
 
-  /* ✅ ФОТО АРТЁМА */
   .hero-photo {
     position: relative;
     aspect-ratio: 4 / 5;
     border-radius: 20px;
     overflow: hidden;
-    background:
-      linear-gradient(160deg, rgba(254,190,84,0.08), rgba(160,106,24,0.15)),
-      #1a1208;
+    background: linear-gradient(160deg, rgba(254,190,84,0.08), rgba(160,106,24,0.15)), #1a1208;
     border: 1px solid rgba(254,190,84,0.5);
-    box-shadow:
-      0 40px 80px -30px rgba(0,0,0,0.9),
-      0 0 60px rgba(254,190,84,0.25);
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,0.9), 0 0 60px rgba(254,190,84,0.25);
   }
-  .hero-photo::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(circle at 50% 100%, rgba(254,190,84,0.25), transparent 60%);
-    pointer-events: none;
-    z-index: 2;
-  }
-  .hero-photo img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    position: relative;
-    z-index: 1;
-  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
   .section {
     padding: 80px 0;
@@ -380,24 +286,15 @@
     color: var(--gold); margin-bottom: 14px;
     display: inline-flex; align-items: center; gap: 10px;
   }
-  .section-label::before {
-    content: ''; width: 22px; height: 1.5px; background: var(--gold);
-    box-shadow: 0 0 10px var(--gold);
-  }
+  .section-label::before { content: ''; width: 22px; height: 1.5px; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
   .section-heading {
     font-family: 'Unbounded'; font-size: clamp(24px, 3.4vw, 36px);
     font-weight: 800; letter-spacing: -1.2px;
     margin-bottom: 16px; color: var(--text);
   }
-  .section-sub {
-    color: var(--muted); font-size: 16px;
-    margin-bottom: 46px; max-width: 620px;
-  }
+  .section-sub { color: var(--muted); font-size: 16px; margin-bottom: 46px; max-width: 620px; }
 
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1.2fr 0.85fr;
-    gap: 32px;
-  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.2fr 0.85fr; gap: 32px; }
   .info-list { list-style: none; }
   .info-list li {
     display: flex; gap: 14px; align-items: flex-start;
@@ -409,8 +306,7 @@
     background: linear-gradient(135deg, rgba(254,190,84,0.15), rgba(160,106,24,0.08));
     border: 1px solid rgba(254,190,84,0.3);
     display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    flex-shrink: 0;
+    color: var(--gold); flex-shrink: 0;
   }
   .info-list .ico svg { width: 19px; height: 19px; }
   .info-list b {
@@ -419,160 +315,89 @@
     margin-bottom: 3px;
   }
   .info-list span { font-size: 14.5px; color: var(--text); font-weight: 600; }
-  .about-text h3 {
-    font-family: 'Unbounded'; font-size: 18px; font-weight: 800;
-    margin-bottom: 18px; color: var(--text);
-  }
-  .about-text p {
-    color: var(--muted); font-size: 15px;
-    line-height: 1.8; margin-bottom: 16px;
-  }
+  .about-text h3 { font-family: 'Unbounded'; font-size: 18px; font-weight: 800; margin-bottom: 18px; }
+  .about-text p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
 
-  /* ✅ БОКОВОЕ ФОТО АРТЁМА */
   .side-photo {
-    position: relative;
-    border-radius: 18px;
-    overflow: hidden;
-    background:
-      linear-gradient(160deg, rgba(254,190,84,0.08), rgba(160,106,24,0.15)),
-      #1a1208;
+    position: relative; border-radius: 18px; overflow: hidden;
+    background: linear-gradient(160deg, rgba(254,190,84,0.08), rgba(160,106,24,0.15)), #1a1208;
     border: 1px solid var(--line-2);
     min-height: 420px;
     display: flex; align-items: center; justify-content: center;
   }
-  .side-photo::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 100%, rgba(254,190,84,0.25), transparent 70%);
-    pointer-events: none;
-    z-index: 2;
-  }
-  .side-photo img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    position: absolute; inset: 0;
-    z-index: 1;
-  }
+  .side-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0; }
   .side-photo-hand {
-    position: absolute;
-    bottom: 24px; right: 24px;
+    position: absolute; bottom: 24px; right: 24px;
     font-family: 'Caveat'; font-size: 26px; font-weight: 700;
     color: var(--text); transform: rotate(-4deg);
-    text-align: right; line-height: 1.05;
-    z-index: 3;
+    text-align: right; line-height: 1.05; z-index: 3;
     text-shadow: 0 2px 12px rgba(0,0,0,0.9);
   }
   .side-photo-hand::after {
-    content: ''; display: block;
-    width: 100%; height: 2px;
-    background: var(--gold); margin-top: 4px;
-    box-shadow: 0 0 10px var(--gold);
+    content: ''; display: block; width: 100%; height: 2px;
+    background: var(--gold); margin-top: 4px; box-shadow: 0 0 10px var(--gold);
   }
 
   .timeline { position: relative; padding-left: 30px; }
   .timeline::before {
     content: ''; position: absolute;
-    left: 8px; top: 8px; bottom: 8px;
-    width: 2px;
+    left: 8px; top: 8px; bottom: 8px; width: 2px;
     background: linear-gradient(180deg, var(--gold), transparent);
     box-shadow: 0 0 12px rgba(254,190,84,0.5);
   }
-  .timeline-item {
-    position: relative;
-    padding: 0 0 36px 34px;
-  }
+  .timeline-item { position: relative; padding: 0 0 36px 34px; }
   .timeline-item:last-child { padding-bottom: 0; }
   .timeline-item::before {
     content: ''; position: absolute;
     left: -30px; top: 6px;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 3px solid var(--gold);
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--gold);
     box-shadow: 0 0 16px rgba(254,190,84,0.8);
   }
-  .timeline-year {
-    font-family: 'Unbounded'; font-size: 12px; font-weight: 800;
-    color: var(--gold); letter-spacing: 2.5px;
-    margin-bottom: 8px;
-  }
-  .timeline-title {
-    font-family: 'Unbounded'; font-size: 16px; font-weight: 800;
-    color: var(--text); margin-bottom: 6px;
-  }
-  .timeline-desc {
-    color: var(--muted); font-size: 14.5px;
-  }
+  .timeline-year { font-family: 'Unbounded'; font-size: 12px; font-weight: 800; color: var(--gold); letter-spacing: 2.5px; margin-bottom: 8px; }
+  .timeline-title { font-family: 'Unbounded'; font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .timeline-desc { color: var(--muted); font-size: 14.5px; }
 
-  .values-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-  }
+  .values-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
   .value-card {
     background: linear-gradient(160deg, var(--card), var(--bg-2));
     border: 1px solid var(--line);
     border-radius: 16px; padding: 26px 20px;
     transition: transform .35s, border-color .35s, box-shadow .35s;
   }
-  .value-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(254,190,84,0.5);
-    box-shadow: 0 24px 50px -22px rgba(254,190,84,0.5);
-  }
+  .value-card:hover { transform: translateY(-6px); border-color: rgba(254,190,84,0.5); box-shadow: 0 24px 50px -22px rgba(254,190,84,0.5); }
   .value-card .ico {
     width: 44px; height: 44px; border-radius: 12px;
     background: linear-gradient(135deg, rgba(254,190,84,0.18), rgba(160,106,24,0.1));
     border: 1px solid rgba(254,190,84,0.35);
     display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    margin-bottom: 16px;
+    color: var(--gold); margin-bottom: 16px;
   }
   .value-card .ico svg { width: 21px; height: 21px; }
-  .value-card h4 {
-    font-family: 'Unbounded'; font-size: 14px; font-weight: 800;
-    margin-bottom: 8px; color: var(--text);
-  }
-  .value-card p {
-    font-size: 12.5px; color: var(--muted); line-height: 1.6;
-  }
+  .value-card h4 { font-family: 'Unbounded'; font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .value-card p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
 
-  .program-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
+  .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .program-card {
     background: linear-gradient(160deg, var(--card), var(--bg-2));
     border: 1px solid var(--line);
     border-radius: 20px; padding: 34px 28px;
     transition: transform .35s, border-color .35s, box-shadow .35s;
   }
-  .program-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(254,190,84,0.5);
-    box-shadow: 0 28px 55px -24px rgba(254,190,84,0.5);
-  }
+  .program-card:hover { transform: translateY(-6px); border-color: rgba(254,190,84,0.5); box-shadow: 0 28px 55px -24px rgba(254,190,84,0.5); }
   .program-ico {
-    width: 52px; height: 52px;
-    border-radius: 14px;
+    width: 52px; height: 52px; border-radius: 14px;
     background: linear-gradient(135deg, rgba(254,190,84,0.18), rgba(160,106,24,0.1));
     border: 1px solid rgba(254,190,84,0.35);
     display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    margin-bottom: 18px;
+    color: var(--gold); margin-bottom: 18px;
   }
   .program-ico svg { width: 24px; height: 24px; }
-  .program-card h3 {
-    font-family: 'Unbounded'; font-size: 17px; font-weight: 800;
-    margin-bottom: 12px; color: var(--text);
-  }
-  .program-card p {
-    color: var(--muted); font-size: 14px; line-height: 1.7;
-    margin-bottom: 16px;
-  }
+  .program-card h3 { font-family: 'Unbounded'; font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+  .program-card p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
   .program-card .deadline {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 11.5px; font-weight: 700;
-    color: var(--gold);
+    font-size: 11.5px; font-weight: 700; color: var(--gold);
     padding: 6px 12px; border-radius: 20px;
     background: rgba(254,190,84,0.1);
     border: 1px solid rgba(254,190,84,0.3);
@@ -581,19 +406,14 @@
   .faq-list { max-width: 800px; }
   .faq-item {
     border: 1px solid var(--line);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    overflow: hidden;
+    border-radius: 14px; margin-bottom: 10px; overflow: hidden;
     background: linear-gradient(160deg, var(--card), var(--bg-2));
   }
-  .faq-item.open {
-    border-color: rgba(254,190,84,0.5);
-  }
+  .faq-item.open { border-color: rgba(254,190,84,0.5); }
   .faq-q {
     padding: 18px 22px;
     display: flex; justify-content: space-between; align-items: center;
     cursor: pointer; font-weight: 700; font-size: 15px;
-    color: var(--text);
     gap: 16px;
   }
   .faq-q:hover, .faq-item.open .faq-q { color: var(--gold); }
@@ -603,21 +423,122 @@
     border: 1px solid rgba(254,190,84,0.4);
     display: flex; align-items: center; justify-content: center;
     color: var(--gold); font-weight: 800; font-size: 17px;
-    flex-shrink: 0;
-    transition: transform .3s, background .3s;
+    flex-shrink: 0; transition: transform .3s, background .3s;
   }
-  .faq-item.open .faq-toggle {
-    transform: rotate(45deg);
-    background: var(--gold); color: #1a1208;
-  }
-  .faq-a {
-    max-height: 0; overflow: hidden;
-    transition: max-height .35s ease;
-    color: var(--muted); font-size: 14px;
-  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--gold); color: #1a1208; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; color: var(--muted); font-size: 14px; }
   .faq-a-inner { padding: 0 22px 20px; }
   .faq-item.open .faq-a { max-height: 300px; }
 
+  /* ===== VOTE ===== */
+  .vote-section {
+    padding: 90px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+    z-index: 2;
+    background:
+      radial-gradient(900px 500px at 50% 50%, rgba(254,190,84,0.1), transparent 70%);
+  }
+  .vote-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    background: linear-gradient(160deg, var(--card), var(--bg-2));
+    border: 1px solid rgba(254,190,84,0.35);
+    border-radius: 28px;
+    padding: 50px 30px;
+    box-shadow: 0 30px 70px -30px rgba(254,190,84,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .vote-inner::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .vote-title {
+    font-family: 'Unbounded'; font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900; letter-spacing: -1px;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, var(--text), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+  }
+  .vote-sub {
+    color: var(--muted); font-size: 15px; margin-bottom: 30px;
+  }
+  .vote-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #1a1208;
+    font-family: 'Unbounded'; font-weight: 900;
+    font-size: 20px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 18px 60px;
+    border-radius: 50px;
+    border: none; cursor: pointer;
+    box-shadow: 0 10px 40px rgba(254,190,84,0.6);
+    transition: transform .2s, box-shadow .25s;
+    margin-bottom: 24px;
+    min-width: 200px;
+  }
+  .vote-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 16px 50px rgba(254,190,84,0.8);
+  }
+  .vote-btn:active { transform: translateY(0) scale(0.98); }
+  .vote-btn:disabled { cursor: default; opacity: 0.6; }
+
+  .vote-counter {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--muted);
+    padding: 10px 20px;
+    background: rgba(254,190,84,0.06);
+    border: 1px solid rgba(254,190,84,0.25);
+    border-radius: 30px;
+    font-weight: 600;
+  }
+  .vote-counter b {
+    font-family: 'Unbounded'; font-size: 18px;
+    color: var(--gold); font-weight: 900;
+    margin: 0 2px;
+  }
+  .vote-counter .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .vote-thanks {
+    display: none;
+    animation: thanksIn .6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .vote-thanks.show { display: block; }
+  @keyframes thanksIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .vote-thanks img {
+    max-width: 100%;
+    height: auto;
+    max-height: 320px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto 20px;
+    box-shadow: 0 20px 50px -20px rgba(254,190,84,0.6);
+  }
+  .vote-thanks-text {
+    font-family: 'Unbounded'; font-size: 18px; font-weight: 800;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .vote-thanks-sub { color: var(--muted); font-size: 14px; }
+
+  /* ===== GAME ===== */
   .game-section {
     padding: 90px 0;
     border-top: 1px solid var(--line);
@@ -642,24 +563,19 @@
   .game-rule {
     display: flex; align-items: center; gap: 10px;
     font-size: 13.5px; color: var(--muted); font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 30px;
+    padding: 8px 16px; border-radius: 30px;
     background: rgba(254,190,84,0.05);
     border: 1px solid var(--line-2);
   }
-  .game-rule .dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .game-rule .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
   .dot.friend { background: radial-gradient(circle, #ffe0a0, var(--gold)); box-shadow: 0 0 14px rgba(254,190,84,0.9); }
   .dot.enemy { background: radial-gradient(circle, #b0b0c0, #606070); box-shadow: 0 0 14px rgba(120,120,140,0.6); }
 
   .game-wrap { max-width: 700px; margin: 0 auto; }
   .game-box {
     position: relative;
-    background:
-      radial-gradient(circle at 50% 30%, rgba(254,190,84,0.12), transparent 70%),
-      linear-gradient(180deg, #0f0b06, #050302);
+    background: radial-gradient(circle at 50% 30%, rgba(254,190,84,0.12), transparent 70%),
+                linear-gradient(180deg, #0f0b06, #050302);
     border: 1px solid var(--line-2);
     border-radius: 22px;
     overflow: hidden;
@@ -717,32 +633,27 @@
     color: #1a1208;
     will-change: transform;
     z-index: 2;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
   }
   .ball.friend {
-    background: radial-gradient(circle at 35% 30%, #fff2d0, var(--gold) 60%, var(--gold-dark));
+    border: 2px solid rgba(255,255,255,0.6);
     box-shadow: 0 0 24px rgba(254,190,84,0.85);
-    border: 2px solid rgba(255,255,255,0.55);
-    color: #5a3a10;
+    background-color: var(--gold);
   }
   .ball.enemy {
-    background: radial-gradient(circle at 35% 30%, #e8e8f0, #a0a0b0 60%, #606070);
-    box-shadow: 0 0 18px rgba(160,160,176,0.5);
     border: 2px solid rgba(255,255,255,0.4);
-    color: #3a3a44;
+    box-shadow: 0 0 18px rgba(160,160,176,0.5);
+    background-color: #a0a0b0;
   }
-  .ball.captured {
-    animation: capture .35s ease-out forwards;
-    pointer-events: none;
-  }
+  .ball.captured { animation: capture .35s ease-out forwards; pointer-events: none; }
   @keyframes capture {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.4); opacity: 0.8; }
     100% { transform: scale(0.2); opacity: 0; }
   }
-  .ball.miss {
-    animation: miss .35s ease-out forwards;
-    pointer-events: none;
-  }
+  .ball.miss { animation: miss .35s ease-out forwards; pointer-events: none; }
   @keyframes miss {
     0% { transform: scale(1); opacity: 1; }
     100% { transform: scale(1.6) translateY(-20px); opacity: 0; }
@@ -786,9 +697,7 @@
   .spark {
     position: absolute;
     width: 6px; height: 6px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 4;
+    border-radius: 50%; pointer-events: none; z-index: 4;
   }
   .spark.gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
   .spark.gray { background: #b0b0c0; box-shadow: 0 0 10px #b0b0c0; }
@@ -800,10 +709,7 @@
     align-items: center; justify-content: center;
     text-align: center; z-index: 6; gap: 12px; padding: 30px;
   }
-  .game-over h3 {
-    font-family: 'Unbounded'; font-size: 26px;
-    color: var(--gold); font-weight: 900;
-  }
+  .game-over h3 { font-family: 'Unbounded'; font-size: 26px; color: var(--gold); font-weight: 900; }
   .game-over .final-score {
     font-family: 'Unbounded'; font-size: 64px; font-weight: 900;
     background: linear-gradient(135deg, var(--text), var(--gold) 60%, var(--gold-soft));
@@ -824,14 +730,12 @@
     padding: 100px 0;
     text-align: center;
     border-top: 1px solid var(--line);
-    z-index: 2;
-    position: relative;
+    z-index: 2; position: relative;
   }
   .cta-section h2 {
     font-family: 'Unbounded'; font-size: clamp(26px, 4.8vw, 50px);
     font-weight: 900; letter-spacing: -2px;
     line-height: 1.1; margin-bottom: 22px;
-    color: var(--text);
   }
   .cta-section h2 .accent {
     display: block;
@@ -839,10 +743,7 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .cta-section .subtitle {
-    color: var(--muted); font-size: 16px; max-width: 600px;
-    margin: 0 auto;
-  }
+  .cta-section .subtitle { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
 
   footer {
     border-top: 1px solid var(--line);
@@ -854,10 +755,7 @@
     display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 20px;
   }
-  .footer-slogan {
-    font-family: 'Caveat'; font-size: 24px;
-    color: var(--text); transform: rotate(-2deg);
-  }
+  .footer-slogan { font-family: 'Caveat'; font-size: 24px; transform: rotate(-2deg); }
   .footer-bottom {
     margin-top: 30px; padding-top: 22px;
     border-top: 1px solid var(--line);
@@ -881,6 +779,8 @@
     .ball { width: 54px; height: 54px; font-size: 15px; }
     .bin { width: 80px; height: 80px; }
     .footer-inner { justify-content: center; text-align: center; }
+    .vote-inner { padding: 40px 20px; }
+    .vote-btn { padding: 16px 40px; font-size: 18px; }
   }
 </style>
 </head>
@@ -920,6 +820,7 @@
     <li><a href="#program"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></span><span class="label">Программа</span><span class="arrow">→</span></a></li>
     <li><a href="#faq"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></span><span class="label">Частые вопросы</span><span class="arrow">→</span></a></li>
     <li><a href="#game"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 12h4M8 10v4"/></svg></span><span class="label">Игра</span><span class="arrow">→</span></a></li>
+    <li><a href="#vote"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="label">Проголосовать</span><span class="arrow">→</span></a></li>
   </ul>
   <div class="side-foot">
     <div class="side-slogan">Вместе мы можем больше!</div>
@@ -949,11 +850,10 @@
           <p>Я иду в президенты, чтобы сделать нашу школу местом, куда хочется приходить. Не буду обещать невозможного — сделаю то, что действительно важно.</p>
           <div class="hero-buttons">
             <a href="#program" class="btn">Моя программа</a>
-            <a href="#game" class="btn btn-outline">Играть в игру</a>
+            <a href="#vote" class="btn btn-outline">Проголосовать</a>
           </div>
           <div class="hero-signature">Артём Ахтямов</div>
         </div>
-        <!-- ✅ ФОТО АРТЁМА -->
         <div class="hero-photo">
           <img src="artem.png" alt="Артём Ахтямов">
         </div>
@@ -982,7 +882,6 @@
         <p>Я хочу быть тем, кто действительно слушает, слышит и действует.</p>
         <p>У меня есть идеи, энергия и желание сделать нашу школу местом, где каждый чувствует себя частью большого и дружного коллектива.</p>
       </div>
-      <!-- ✅ ФОТО АРТЁМА -->
       <div class="side-photo">
         <img src="artem.png" alt="Артём Ахтямов">
         <div class="side-photo-hand">Лучшие<br>перемены<br>впереди…</div>
@@ -1049,6 +948,29 @@
   </div>
 </section>
 
+<!-- ===== VOTE ===== -->
+<section class="vote-section" id="vote">
+  <div class="container">
+    <div class="vote-inner">
+      <div id="voteForm">
+        <h2 class="vote-title">Проголосуешь за нас?</h2>
+        <p class="vote-sub">Твой голос важен — и он виден всем</p>
+        <button class="vote-btn" id="voteBtn">Да</button>
+        <br>
+        <div class="vote-counter">
+          <span class="pulse-dot"></span>
+          Уже проголосовали: <b id="voteCount">0</b>
+        </div>
+      </div>
+      <div class="vote-thanks" id="voteThanks">
+        <img src="thanks.png" alt="Спасибо за голос!">
+        <div class="vote-thanks-text">Спасибо за поддержку!</div>
+        <div class="vote-thanks-sub">Всего проголосовали: <b id="voteCountAfter">0</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="game-section" id="game">
   <div class="container">
     <div class="game-header">
@@ -1092,7 +1014,64 @@
   </div>
 </footer>
 
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBCYAFCYZKWSt5gxFpVsJZGvnOL4f1R5xQ",
+    authDomain: "presidentvinotw.firebaseapp.com",
+    databaseURL: "https://presidentvinotw-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "presidentvinotw",
+    storageBucket: "presidentvinotw.firebasestorage.app",
+    messagingSenderId: "667925660304",
+    appId: "1:667925660304:web:6e22a7c4392ce2b10bce15"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const voteCountEl = document.getElementById('voteCount');
+  const voteCountAfterEl = document.getElementById('voteCountAfter');
+  const voteBtn = document.getElementById('voteBtn');
+  const voteForm = document.getElementById('voteForm');
+  const voteThanks = document.getElementById('voteThanks');
+
+  // Live counter
+  const votesRef = ref(db, 'votes');
+  onValue(votesRef, (snapshot) => {
+    const count = snapshot.val() || 0;
+    if (voteCountEl) voteCountEl.textContent = count;
+    if (voteCountAfterEl) voteCountAfterEl.textContent = count;
+  });
+
+  // Check if already voted
+  const hasVoted = localStorage.getItem('voted') === 'yes';
+  if (hasVoted) {
+    voteForm.style.display = 'none';
+    voteThanks.classList.add('show');
+  }
+
+  // Vote handler
+  voteBtn.addEventListener('click', async () => {
+    if (localStorage.getItem('voted') === 'yes') return;
+    voteBtn.disabled = true;
+    try {
+      await runTransaction(votesRef, (current) => (current || 0) + 1);
+      localStorage.setItem('voted', 'yes');
+      voteForm.style.display = 'none';
+      voteThanks.classList.add('show');
+    } catch (e) {
+      console.error('Ошибка голосования:', e);
+      voteBtn.disabled = false;
+      alert('Не удалось проголосовать. Проверь интернет.');
+    }
+  });
+</script>
+
 <script>
+  // Меню
   const menuBtn = document.getElementById('menuBtn');
   const sideMenu = document.getElementById('sideMenu');
   const sideOverlay = document.getElementById('sideOverlay');
@@ -1106,12 +1085,16 @@
   sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('open')));
 
+  // Игра
   const gameBox = document.getElementById('gameBox');
   const gameStart = document.getElementById('gameStart');
   const startBtn = document.getElementById('startBtn');
   let running = false, score = 0, timeLeft = 45, binX = 0, binTargetX = 0, bin, hud, spawnTimer, countdownTimer, animFrame, lastTime = 0, spawnInterval = 800, activeBalls = 0;
   const BIN_WIDTH = 96, BALL_SIZE = 66, MAX_BALLS = 6;
-  const friends = ['А', 'Б', 'В'], enemies = ['X', 'Y', 'Z'];
+
+  // Настройка: картинки для шариков (потом заменишь на свои)
+  const friendImages = ['artem.png', 'artem.png', 'artem.png']; // свои — показывают твоё фото
+  const enemyImages = [null, null, null]; // серые шарики
 
   function startGame() {
     score = 0; timeLeft = 45; running = true; spawnInterval = 800; activeBalls = 0;
@@ -1154,9 +1137,14 @@
     const ball = document.createElement('div');
     ball.className = 'ball';
     const isFriend = Math.random() < 0.65;
-    const names = isFriend ? friends : enemies;
     ball.classList.add(isFriend ? 'friend' : 'enemy');
-    ball.textContent = names[Math.floor(Math.random() * names.length)];
+    if (isFriend) {
+      const img = friendImages[Math.floor(Math.random() * friendImages.length)];
+      if (img) ball.style.backgroundImage = `url('${img}')`;
+    } else {
+      const img = enemyImages[Math.floor(Math.random() * enemyImages.length)];
+      if (img) ball.style.backgroundImage = `url('${img}')`;
+    }
     const maxX = gameBox.clientWidth - BALL_SIZE;
     const x = Math.random() * maxX;
     let y = -BALL_SIZE;
@@ -1242,4 +1230,4 @@
 </script>
 
 </body>
-           </html>
+ </html>
