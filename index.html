@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Артём Ахтямов — кандидат в президенты школы</title>
+<title>ОРБИТА — школьная республика</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
@@ -210,11 +210,14 @@
     margin-bottom: 20px; font-weight: 700;
   }
   .hero-tag::before { content: ''; width: 26px; height: 1.5px; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  
+  /* ИЗМЕНЕНИЕ 1: Заголовок в одну строку */
   .hero h1 {
-    font-family: 'Unbounded'; font-size: clamp(38px, 5.8vw, 68px);
+    font-family: 'Unbounded'; font-size: clamp(34px, 6.5vw, 68px);
     font-weight: 900; line-height: 1; letter-spacing: -2.5px;
     color: var(--text); margin-bottom: 24px;
     text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+    white-space: nowrap;
   }
   .hero h1 .accent {
     background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--gold-soft) 100%);
@@ -337,26 +340,6 @@
     content: ''; display: block; width: 100%; height: 2px;
     background: var(--gold); margin-top: 4px; box-shadow: 0 0 10px var(--gold);
   }
-
-  .timeline { position: relative; padding-left: 30px; }
-  .timeline::before {
-    content: ''; position: absolute;
-    left: 8px; top: 8px; bottom: 8px; width: 2px;
-    background: linear-gradient(180deg, var(--gold), transparent);
-    box-shadow: 0 0 12px rgba(254,190,84,0.5);
-  }
-  .timeline-item { position: relative; padding: 0 0 36px 34px; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-item::before {
-    content: ''; position: absolute;
-    left: -30px; top: 6px;
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--bg); border: 3px solid var(--gold);
-    box-shadow: 0 0 16px rgba(254,190,84,0.8);
-  }
-  .timeline-year { font-family: 'Unbounded'; font-size: 12px; font-weight: 800; color: var(--gold); letter-spacing: 2.5px; margin-bottom: 8px; }
-  .timeline-title { font-family: 'Unbounded'; font-size: 16px; font-weight: 800; margin-bottom: 6px; }
-  .timeline-desc { color: var(--muted); font-size: 14.5px; }
 
   .values-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
   .value-card {
@@ -538,194 +521,6 @@
   }
   .vote-thanks-sub { color: var(--muted); font-size: 14px; }
 
-  /* ===== GAME ===== */
-  .game-section {
-    padding: 90px 0;
-    border-top: 1px solid var(--line);
-    position: relative;
-    z-index: 2;
-  }
-  .game-header { text-align: center; margin-bottom: 44px; }
-  .game-header .section-label { justify-content: center; }
-  .game-header h2 {
-    font-family: 'Unbounded'; font-size: clamp(28px, 4.5vw, 48px);
-    font-weight: 900; letter-spacing: -1.8px;
-    line-height: 1.1; margin: 12px 0 16px;
-    background: linear-gradient(135deg, var(--text) 0%, var(--gold) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .game-header p { color: var(--muted); font-size: 16px; max-width: 580px; margin: 0 auto; }
-  .game-rules {
-    display: flex; justify-content: center; gap: 26px;
-    margin-top: 26px; flex-wrap: wrap;
-  }
-  .game-rule {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13.5px; color: var(--muted); font-weight: 600;
-    padding: 8px 16px; border-radius: 30px;
-    background: rgba(254,190,84,0.05);
-    border: 1px solid var(--line-2);
-  }
-  .game-rule .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .dot.friend { background: radial-gradient(circle, #ffe0a0, var(--gold)); box-shadow: 0 0 14px rgba(254,190,84,0.9); }
-  .dot.enemy { background: radial-gradient(circle, #b0b0c0, #606070); box-shadow: 0 0 14px rgba(120,120,140,0.6); }
-
-  .game-wrap { max-width: 700px; margin: 0 auto; }
-  .game-box {
-    position: relative;
-    background: radial-gradient(circle at 50% 30%, rgba(254,190,84,0.12), transparent 70%),
-                linear-gradient(180deg, #0f0b06, #050302);
-    border: 1px solid var(--line-2);
-    border-radius: 22px;
-    overflow: hidden;
-    height: 540px;
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
-    user-select: none;
-    touch-action: none;
-  }
-  .game-box::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(254,190,84,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(254,190,84,0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    pointer-events: none;
-    mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
-  }
-  .game-start {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 30px; z-index: 3;
-    background: rgba(5,3,2,0.6);
-  }
-  .game-start h3 {
-    font-family: 'Unbounded'; font-size: 24px; font-weight: 800;
-    margin-bottom: 14px;
-    background: linear-gradient(135deg, var(--text), var(--gold));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .game-start p { color: var(--muted); margin-bottom: 26px; max-width: 420px; font-size: 14.5px; }
-
-  .game-hud {
-    position: absolute; top: 18px; left: 18px; right: 18px;
-    display: flex; justify-content: space-between;
-    font-family: 'Unbounded'; font-weight: 800; font-size: 14px;
-    z-index: 4; pointer-events: none;
-  }
-  .game-hud span {
-    background: rgba(0,0,0,0.75);
-    padding: 8px 16px; border-radius: 30px;
-    border: 1px solid rgba(254,190,84,0.4);
-  }
-  .game-hud .score { color: var(--gold); }
-  .game-hud .timer { color: var(--text); }
-
-  .ball {
-    position: absolute;
-    width: 66px; height: 66px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Unbounded'; font-size: 18px; font-weight: 900;
-    color: #1a1208;
-    will-change: transform;
-    z-index: 2;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-  }
-  .ball.friend {
-    border: 2px solid rgba(255,255,255,0.6);
-    box-shadow: 0 0 24px rgba(254,190,84,0.85);
-    background-color: var(--gold);
-  }
-  .ball.enemy {
-    border: 2px solid rgba(255,255,255,0.4);
-    box-shadow: 0 0 18px rgba(160,160,176,0.5);
-    background-color: #a0a0b0;
-  }
-  .ball.captured { animation: capture .35s ease-out forwards; pointer-events: none; }
-  @keyframes capture {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.8; }
-    100% { transform: scale(0.2); opacity: 0; }
-  }
-  .ball.miss { animation: miss .35s ease-out forwards; pointer-events: none; }
-  @keyframes miss {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.6) translateY(-20px); opacity: 0; }
-  }
-
-  .bin {
-    position: absolute;
-    bottom: 18px;
-    width: 96px; height: 96px;
-    z-index: 3;
-    filter: drop-shadow(0 10px 28px rgba(254,190,84,0.7));
-    will-change: left;
-  }
-  .bin.hit { animation: bin-hit .25s ease-out; }
-  @keyframes bin-hit {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-  }
-  .bin.miss-shake { animation: bin-miss .3s ease-out; }
-  @keyframes bin-miss {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-  }
-  .bin svg { width: 100%; height: 100%; }
-
-  .floating-point {
-    position: absolute;
-    font-family: 'Unbounded'; font-weight: 900;
-    font-size: 24px; pointer-events: none;
-    animation: float-up 1s ease-out forwards;
-    z-index: 5;
-  }
-  .floating-point.plus { color: var(--gold); text-shadow: 0 0 16px rgba(254,190,84,1); }
-  .floating-point.minus { color: #b0b0c0; text-shadow: 0 0 16px rgba(200,200,220,0.9); }
-  @keyframes float-up {
-    0% { opacity: 1; transform: translateY(0) scale(0.6); }
-    40% { opacity: 1; transform: translateY(-20px) scale(1.3); }
-    100% { opacity: 0; transform: translateY(-80px) scale(1); }
-  }
-  .spark {
-    position: absolute;
-    width: 6px; height: 6px;
-    border-radius: 50%; pointer-events: none; z-index: 4;
-  }
-  .spark.gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
-  .spark.gray { background: #b0b0c0; box-shadow: 0 0 10px #b0b0c0; }
-
-  .game-over {
-    position: absolute; inset: 0;
-    background: rgba(5,3,2,0.96);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; z-index: 6; gap: 12px; padding: 30px;
-  }
-  .game-over h3 { font-family: 'Unbounded'; font-size: 26px; color: var(--gold); font-weight: 900; }
-  .game-over .final-score {
-    font-family: 'Unbounded'; font-size: 64px; font-weight: 900;
-    background: linear-gradient(135deg, var(--text), var(--gold) 60%, var(--gold-soft));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1; margin: 6px 0;
-  }
-  .game-over p { color: var(--muted); max-width: 400px; font-size: 14.5px; }
-  .game-over .record {
-    font-size: 12px; color: var(--gold); font-weight: 700;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 20px;
-    background: rgba(254,190,84,0.1);
-    border: 1px solid rgba(254,190,84,0.35);
-  }
-
   .cta-section {
     padding: 100px 0;
     text-align: center;
@@ -775,9 +570,6 @@
     .values-grid { grid-template-columns: 1fr; }
     .hero-buttons { flex-direction: column; align-items: stretch; }
     .btn { justify-content: center; }
-    .game-box { height: 480px; }
-    .ball { width: 54px; height: 54px; font-size: 15px; }
-    .bin { width: 80px; height: 80px; }
     .footer-inner { justify-content: center; text-align: center; }
     .vote-inner { padding: 40px 20px; }
     .vote-btn { padding: 16px 40px; font-size: 18px; }
@@ -790,11 +582,11 @@
   <div class="nav">
     <div class="logo">
       <div class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg>
       </div>
       <div class="logo-text">
-        <b>Артём Ахтямов</b>
-        <span>Наша сила — в людях</span>
+        <b>ОРБИТА</b>
+        <span>Школьная республика</span>
       </div>
     </div>
     <button class="menu-btn" id="menuBtn">
@@ -814,17 +606,15 @@
   </div>
   <div class="side-divider"></div>
   <ul class="side-nav" id="sideNav">
-    <li><a href="#about"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="label">Обо мне</span><span class="arrow">→</span></a></li>
-    <li><a href="#path"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/></svg></span><span class="label">Мой путь</span><span class="arrow">→</span></a></li>
+    <li><a href="#about"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="label">О республике</span><span class="arrow">→</span></a></li>
     <li><a href="#values"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5L12 2z"/></svg></span><span class="label">Ценности</span><span class="arrow">→</span></a></li>
-    <li><a href="#program"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></span><span class="label">Программа</span><span class="arrow">→</span></a></li>
+    <li><a href="#program"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></span><span class="label">Проекты</span><span class="arrow">→</span></a></li>
     <li><a href="#faq"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></span><span class="label">Частые вопросы</span><span class="arrow">→</span></a></li>
-    <li><a href="#game"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 12h4M8 10v4"/></svg></span><span class="label">Игра</span><span class="arrow">→</span></a></li>
-    <li><a href="#vote"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="label">Проголосовать</span><span class="arrow">→</span></a></li>
+    <li><a href="#vote"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="label">Вступить</span><span class="arrow">→</span></a></li>
   </ul>
   <div class="side-foot">
-    <div class="side-slogan">Вместе мы можем больше!</div>
-    <div class="side-copy">© 2026 Артём Ахтямов</div>
+    <div class="side-slogan">Вместе на одной орбите!</div>
+    <div class="side-copy">© 2026 ОРБИТА</div>
   </div>
 </aside>
 
@@ -835,27 +625,27 @@
     <div class="container">
       <div class="election-badge">
         <div class="badge-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(-28 12 12)"/></svg>
         </div>
         <div class="badge-text">
-          <b>Выборы 19 октября</b>
-          <span>МАОУ «СОШ №5»</span>
+          <b>Школьная республика</b>
+          <span>Объединение · Развитие · Будущее</span>
         </div>
       </div>
       <div class="hero-grid">
         <div>
-          <div class="hero-tag">Кандидат в президенты школы</div>
-          <h1>Артём<br><span class="accent">Ахтямов</span></h1>
-          <div class="hero-slogan">«Сильное будущее начинается с нас»</div>
-          <p>Я иду в президенты, чтобы сделать нашу школу местом, куда хочется приходить. Не буду обещать невозможного — сделаю то, что действительно важно.</p>
+          <div class="hero-tag">Добро пожаловать в ОРБИТУ</div>
+          <h1>ОРБ<span class="accent">ИТА</span></h1>
+          <div class="hero-slogan">«Вместе на одной орбите»</div>
+          <p>ОРБИТА — это школьная республика, где каждый ученик может предложить идею, найти команду и воплотить её в жизнь. Мы объединяем ребят, чтобы делать школу лучше.</p>
           <div class="hero-buttons">
-            <a href="#program" class="btn">Моя программа</a>
-            <a href="#vote" class="btn btn-outline">Проголосовать</a>
+            <a href="#program" class="btn">Наши проекты</a>
+            <a href="#vote" class="btn btn-outline">Вступить в ОРБИТУ</a>
           </div>
-          <div class="hero-signature">Артём Ахтямов</div>
+          <div class="hero-signature">Наша орбита — наше будущее</div>
         </div>
         <div class="hero-photo">
-          <img src="artem.png" alt="Артём Ахтямов">
+          <img src="artem.png" alt="Школьная республика ОРБИТА">
         </div>
       </div>
     </div>
@@ -864,44 +654,28 @@
 
 <section class="section" id="about">
   <div class="container">
-    <div class="section-label">Обо мне</div>
-    <h2 class="section-heading">Немного фактов</h2>
-    <p class="section-sub">Чтобы вы лучше меня узнали перед выборами.</p>
+    <div class="section-label">О республике</div>
+    <h2 class="section-heading">Немного об ОРБИТЕ</h2>
+    <p class="section-sub">Коротко о том, кто мы и чем живём.</p>
     <div class="about-grid">
       <div>
         <ul class="info-list">
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><b>Возраст</b><span>15 лет</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></div><div><b>Учусь в</b><span>9 «В» классе</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.3 5.5 21 7 14 2 9.3 9 9"/></svg></div><div><b>Опыт</b><span>Участник мероприятий, волонтёр</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><div><b>Интересы</b><span>Технологии, спорт, саморазвитие</span></div></li>
+          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><b>Основана</b><span>2026 год</span></div></li>
+          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><b>Состав</b><span>Актив учеников 5–11 классов</span></div></li>
+          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5L12 2z"/></svg></div><div><b>Направления</b><span>Мероприятия, творчество, спорт, медиа</span></div></li>
+          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><div><b>Девиз</b><span>Вместе на одной орбите</span></div></li>
         </ul>
       </div>
       <div class="about-text">
-        <h3>Почему я?</h3>
-        <p>Я знаю, что такое быть учеником. Я сам сталкивался с трудностями, видел, что в нашей школе не хватает перемен.</p>
-        <p>Я хочу быть тем, кто действительно слушает, слышит и действует.</p>
-        <p>У меня есть идеи, энергия и желание сделать нашу школу местом, где каждый чувствует себя частью большого и дружного коллектива.</p>
+        <h3>Кто мы?</h3>
+        <p>ОРБИТА — это объединение ребят, которым не всё равно. Мы собираем идеи учеников, помогаем им находить команду и вместе превращаем задумки в реальные школьные события.</p>
+        <p>Мы верим, что школа — это не только уроки, но и место, где можно творить, дружить и расти.</p>
+        <p>Вступить может каждый: достаточно идеи и желания делать.</p>
       </div>
       <div class="side-photo">
-        <img src="artem.png" alt="Артём Ахтямов">
-        <div class="side-photo-hand">Лучшие<br>перемены<br>впереди…</div>
+        <img src="artem.png" alt="ОРБИТА">
+        <div class="side-photo-hand">Твоя идея<br>меняет<br>орбиту…</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="path">
-  <div class="container">
-    <div class="section-label">Мой путь</div>
-    <h2 class="section-heading">Что я успел сделать</h2>
-    <p class="section-sub">Несколько лет активной школьной жизни.</p>
-    <div class="timeline">
-      <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-title">Пришёл в школьный актив</div><div class="timeline-desc">Начал помогать в организации мероприятий.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-title">Первый крупный проект</div><div class="timeline-desc">Организовал школьный турнир — более 40 участников.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-title">Волонтёрство</div><div class="timeline-desc">Участвовал в городских и школьных акциях.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-title">Год активной работы</div><div class="timeline-desc">Помогал организовывать мероприятия, работал в команде.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-title">Решение идти в президенты</div><div class="timeline-desc">Понял, что хочу менять школу к лучшему.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2026</div><div class="timeline-title">Кампания и выборы</div><div class="timeline-desc">Готовлюсь к выборам 19 октября — вместе с командой.</div></div>
     </div>
   </div>
 </section>
@@ -909,27 +683,27 @@
 <section class="section" id="values">
   <div class="container">
     <div class="section-label">Ценности</div>
-    <h2 class="section-heading">Мои принципы</h2>
-    <p class="section-sub">Пять основ, на которых будет строиться моя работа.</p>
+    <h2 class="section-heading">Наши принципы</h2>
+    <p class="section-sub">Пять основ, на которых держится ОРБИТА.</p>
     <div class="values-grid">
       <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>Уважение</h4><p>К каждому ученику, независимо от мнения и взглядов.</p></div>
       <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></div><h4>Развитие</h4><p>Больше возможностей для учёбы, спорта и творчества.</p></div>
       <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Справедливость</h4><p>Равные условия для всех и открытый диалог.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>Команда</h4><p>Решать проблемы вместе — значит добиваться большего.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.3 5.5 21 7 14 2 9.3 9 9"/></svg></div><h4>Современная школа</h4><p>Технологии, комфорт и интересная школьная жизнь.</p></div>
+      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>Команда</h4><p>Решать задачи вместе — значит добиваться большего.</p></div>
+      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg></div><h4>Современная школа</h4><p>Технологии, комфорт и интересная школьная жизнь.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="program">
   <div class="container">
-    <div class="section-label">Программа</div>
-    <h2 class="section-heading">Что я обещаю сделать</h2>
-    <p class="section-sub">Я не буду обещать отменять домашку — это попросту невозможно. Но я обещаю сделать три конкретные вещи.</p>
+    <div class="section-label">Проекты</div>
+    <h2 class="section-heading">Чем мы занимаемся</h2>
+    <p class="section-sub">Три направления, которые ОРБИТА ведёт уже сейчас.</p>
     <div class="program-grid">
-      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h3>Больше мероприятий</h3><p>Вместе с командой организую интересные события — от стендапов до киберспортивных турниров.</p><span class="deadline">🎯 1-й месяц</span></div>
-      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3>Совет старост</h3><p>Создам совет старост всех классов, чтобы вы могли доносить проблемы до администрации.</p><span class="deadline">🎯 1-й месяц</span></div>
-      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div><h3>Ящик идей</h3><p>Сделаю специальный ящик, куда вы сможете написать свою идею — которую мы реализуем.</p><span class="deadline">🎯 1-й месяц</span></div>
+      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Мероприятия</h3><p>Организуем события — от стендапов и квизов до киберспортивных турниров и школьных фестивалей.</p><span class="deadline">🎯 Каждый месяц</span></div>
+      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3>Совет старост</h3><p>Площадка, где старосты классов доносят идеи и проблемы до администрации и решают их вместе.</p><span class="deadline">🎯 Постоянно</span></div>
+      <div class="program-card"><div class="program-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div><h3>Ящик идей</h3><p>Любой ученик может оставить идею — лучшие ОРБИТА помогает превратить в реальный проект.</p><span class="deadline">🎯 Открыт всегда</span></div>
     </div>
   </div>
 </section>
@@ -938,12 +712,12 @@
   <div class="container">
     <div class="section-label">Вопросы</div>
     <h2 class="section-heading">Частые вопросы</h2>
-    <p class="section-sub">Отвечаю на то, что спрашивают чаще всего.</p>
+    <p class="section-sub">Отвечаем на то, что спрашивают чаще всего.</p>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">Ты правда сможешь что-то изменить?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Да, потому что я не обещаю невозможного. Три конкретные вещи реально сделать в первый месяц.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Почему именно ты?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Я сам ученик и понимаю проблемы изнутри. У меня есть опыт, команда и желание слушать и действовать.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Как ты будешь слушать учеников?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Через совет старост и ящик идей. Любой ученик сможет предложить идею.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Что насчёт домашки?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Домашку отменить нельзя — это честно. Зато можно сделать школьную жизнь интереснее и комфортнее.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Как вступить в ОРБИТУ?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Достаточно написать нам или подойти к любому участнику актива. Мы расскажем, какие есть направления, и поможем найти своё.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Кто может стать участником?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Любой ученик 5–11 класса. Опыт не нужен — важно желание делать и идеи.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Что делает ОРБИТА?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Организует мероприятия, ведёт совет старост и собирает идеи учеников через ящик идей.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Можно ли предложить свою идею, если я не в активе?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Конечно. Ящик идей открыт для всех — оставь записку, и мы рассмотрим её на ближайшем сборе.</div></div></div>
     </div>
   </div>
 </section>
@@ -953,42 +727,19 @@
   <div class="container">
     <div class="vote-inner">
       <div id="voteForm">
-        <h2 class="vote-title">Проголосуешь за нас?</h2>
+        <h2 class="vote-title">Вступишь в ОРБИТУ?</h2>
         <p class="vote-sub">Твой голос важен — и он виден всем</p>
         <button class="vote-btn" id="voteBtn">Да</button>
         <br>
         <div class="vote-counter">
           <span class="pulse-dot"></span>
-          Уже проголосовали: <b id="voteCount">0</b>
+          Уже с нами: <b id="voteCount">0</b>
         </div>
       </div>
       <div class="vote-thanks" id="voteThanks">
-        <img src="thanks.png" alt="Спасибо за голос!">
-        <div class="vote-thanks-text">Спасибо за поддержку!</div>
-        <div class="vote-thanks-sub">Всего проголосовали: <b id="voteCountAfter">0</b></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="game-section" id="game">
-  <div class="container">
-    <div class="game-header">
-      <div class="section-label">Мини-игра</div>
-      <h2>Поймай голос</h2>
-      <p>Управляй урной для голосования и лови шарики с кандидатами от нашей партии.</p>
-      <div class="game-rules">
-        <div class="game-rule"><span class="dot friend"></span> Наш кандидат — +1 очко</div>
-        <div class="game-rule"><span class="dot enemy"></span> Другой кандидат — −1 очко и −1 секунда</div>
-      </div>
-    </div>
-    <div class="game-wrap">
-      <div class="game-box" id="gameBox">
-        <div class="game-start" id="gameStart">
-          <h3>Готов ловить голоса?</h3>
-          <p>Веди пальцем по экрану, чтобы двигать урну. Собирай своих!</p>
-          <button class="btn" id="startBtn">▶ Начать игру</button>
-        </div>
+        <img src="thanks.png" alt="Спасибо за поддержку!">
+        <div class="vote-thanks-text">Добро пожаловать в ОРБИТУ!</div>
+        <div class="vote-thanks-sub">Всего участников: <b id="voteCountAfter">0</b></div>
       </div>
     </div>
   </div>
@@ -996,8 +747,8 @@
 
 <section class="cta-section">
   <div class="container">
-    <h2>Сделаем нашу школу <span class="accent">лучше, чем вчера!</span></h2>
-    <p class="subtitle">Все обещания из моей программы будут выполнены в первый месяц.</p>
+    <h2>Присоединяйся к <span class="accent">ОРБИТЕ!</span></h2>
+    <p class="subtitle">Твоя идея может стать следующим большим проектом нашей республики.</p>
   </div>
 </section>
 
@@ -1005,12 +756,12 @@
   <div class="container">
     <div class="footer-inner">
       <div class="logo">
-        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
-        <div class="logo-text"><b>Артём Ахтямов</b><span>Наша сила — в людях</span></div>
+        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg></div>
+        <div class="logo-text"><b>ОРБИТА</b><span>Школьная республика</span></div>
       </div>
-      <div class="footer-slogan">Вместе мы можем больше!</div>
+      <div class="footer-slogan">Вместе на одной орбите!</div>
     </div>
-    <div class="footer-bottom">© 2026 Артём Ахтямов · МАОУ «СОШ №5» · Выборы 19 октября</div>
+    <div class="footer-bottom">© 2026 ОРБИТА · Школьная республика · Объединение · Развитие · Будущее</div>
   </div>
 </footer>
 
@@ -1084,149 +835,6 @@
   sideOverlay.addEventListener('click', closeMenu);
   sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('open')));
-
-  // Игра
-  const gameBox = document.getElementById('gameBox');
-  const gameStart = document.getElementById('gameStart');
-  const startBtn = document.getElementById('startBtn');
-  let running = false, score = 0, timeLeft = 45, binX = 0, binTargetX = 0, bin, hud, spawnTimer, countdownTimer, animFrame, lastTime = 0, spawnInterval = 800, activeBalls = 0;
-  const BIN_WIDTH = 96, BALL_SIZE = 66, MAX_BALLS = 6;
-
-  // Настройка: картинки для шариков (потом заменишь на свои)
-  const friendImages = ['artem.png', 'artem.png', 'artem.png']; // свои — показывают твоё фото
-  const enemyImages = [null, null, null]; // серые шарики
-
-  function startGame() {
-    score = 0; timeLeft = 45; running = true; spawnInterval = 800; activeBalls = 0;
-    gameStart.style.display = 'none';
-    hud = document.createElement('div');
-    hud.className = 'game-hud';
-    hud.innerHTML = '<span class="score" id="score">🗳️ 0</span><span class="timer" id="timer">⏱ 45</span>';
-    gameBox.appendChild(hud);
-    bin = document.createElement('div');
-    bin.className = 'bin';
-    bin.innerHTML = `<svg viewBox="0 0 100 100" fill="none"><defs><linearGradient id="binGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe0a0"/><stop offset="1" stop-color="#a06a18"/></linearGradient><linearGradient id="binGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#febe54"/><stop offset="1" stop-color="#7a5010"/></linearGradient></defs><rect x="15" y="35" width="70" height="55" rx="6" fill="url(#binGrad)" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/><rect x="10" y="28" width="80" height="12" rx="3" fill="url(#binGrad2)" stroke="#fff" stroke-width="2" stroke-opacity="0.6"/><rect x="44" y="45" width="12" height="6" rx="2" fill="#1a1208"/><rect x="40" y="60" width="20" height="20" rx="2" fill="rgba(255,255,255,0.25)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.8"/></svg>`;
-    gameBox.appendChild(bin);
-    binX = gameBox.clientWidth / 2 - BIN_WIDTH / 2; binTargetX = binX; bin.style.left = binX + 'px';
-    scheduleSpawn();
-    countdownTimer = setInterval(() => {
-      if (timeLeft > 0) { timeLeft--; const t = document.getElementById('timer'); if (t) t.textContent = '⏱ ' + timeLeft; if (timeLeft <= 0) endGame(); }
-    }, 1000);
-    lastTime = performance.now();
-    function animate(now) {
-      if (!running) return;
-      const dt = Math.min(now - lastTime, 50) / 16.67; lastTime = now;
-      binX += (binTargetX - binX) * 0.22 * dt;
-      binX = Math.max(0, Math.min(gameBox.clientWidth - BIN_WIDTH, binX));
-      bin.style.left = binX + 'px';
-      animFrame = requestAnimationFrame(animate);
-    }
-    animFrame = requestAnimationFrame(animate);
-    setupControls();
-  }
-
-  function scheduleSpawn() {
-    if (!running) return;
-    if (activeBalls < MAX_BALLS) spawnBall();
-    spawnTimer = setTimeout(scheduleSpawn, spawnInterval);
-    if (spawnInterval > 400) spawnInterval -= 12;
-  }
-
-  function spawnBall() {
-    if (!running) return;
-    const ball = document.createElement('div');
-    ball.className = 'ball';
-    const isFriend = Math.random() < 0.65;
-    ball.classList.add(isFriend ? 'friend' : 'enemy');
-    if (isFriend) {
-      const img = friendImages[Math.floor(Math.random() * friendImages.length)];
-      if (img) ball.style.backgroundImage = `url('${img}')`;
-    } else {
-      const img = enemyImages[Math.floor(Math.random() * enemyImages.length)];
-      if (img) ball.style.backgroundImage = `url('${img}')`;
-    }
-    const maxX = gameBox.clientWidth - BALL_SIZE;
-    const x = Math.random() * maxX;
-    let y = -BALL_SIZE;
-    const speed = 1.8 + Math.random() * 1.2;
-    ball.style.left = x + 'px'; ball.style.top = y + 'px';
-    gameBox.appendChild(ball); activeBalls++;
-    function fall() {
-      if (!running) { ball.remove(); activeBalls--; return; }
-      y += speed * 1.6; ball.style.top = y + 'px';
-      const binTop = gameBox.clientHeight - 18 - BIN_WIDTH;
-      const binBottom = gameBox.clientHeight - 18;
-      const ballBottom = y + BALL_SIZE;
-      const ballCenterX = x + BALL_SIZE / 2;
-      const binCenterX = binX + BIN_WIDTH / 2;
-      if (ballBottom >= binTop && ballBottom <= binBottom + 20) {
-        if (Math.abs(ballCenterX - binCenterX) < BIN_WIDTH / 2 - 4) { catchBall(ball, isFriend, x, y); return; }
-      }
-      if (y > gameBox.clientHeight) { ball.remove(); activeBalls--; return; }
-      requestAnimationFrame(fall);
-    }
-    requestAnimationFrame(fall);
-  }
-
-  function catchBall(ball, isFriend, x, y) {
-    ball.classList.add(isFriend ? 'captured' : 'miss');
-    setTimeout(() => { ball.remove(); activeBalls--; }, 400);
-    for (let i = 0; i < 4; i++) {
-      const spark = document.createElement('div');
-      spark.className = 'spark ' + (isFriend ? 'gold' : 'gray');
-      spark.style.left = (x + BALL_SIZE / 2) + 'px';
-      spark.style.top = (y + BALL_SIZE / 2) + 'px';
-      const angle = (Math.PI * 2 * i) / 4;
-      const dist = 40 + Math.random() * 30;
-      spark.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) scale(0)`, opacity: 0 }], { duration: 500, easing: 'ease-out' });
-      gameBox.appendChild(spark); setTimeout(() => spark.remove(), 500);
-    }
-    const point = document.createElement('div');
-    point.className = 'floating-point ' + (isFriend ? 'plus' : 'minus');
-    point.textContent = isFriend ? '+1' : '−1';
-    point.style.left = (x + 8) + 'px'; point.style.top = y + 'px';
-    gameBox.appendChild(point); setTimeout(() => point.remove(), 1000);
-    if (bin) { bin.classList.remove('hit', 'miss-shake'); void bin.offsetWidth; bin.classList.add(isFriend ? 'hit' : 'miss-shake'); }
-    if (isFriend) score++;
-    else { score = Math.max(0, score - 1); timeLeft = Math.max(0, timeLeft - 1); const t = document.getElementById('timer'); if (t) t.textContent = '⏱ ' + timeLeft; if (timeLeft <= 0) endGame(); }
-    const s = document.getElementById('score'); if (s) s.textContent = '🗳️ ' + score;
-  }
-
-  function setupControls() {
-    function move(e) {
-      if (!running) return;
-      let clientX;
-      if (e.touches) clientX = e.touches[0].clientX;
-      else clientX = e.clientX;
-      const rect = gameBox.getBoundingClientRect();
-      binTargetX = (clientX - rect.left) - BIN_WIDTH / 2;
-    }
-    gameBox.addEventListener('touchmove', e => { e.preventDefault(); move(e); }, { passive: false });
-    gameBox.addEventListener('touchstart', e => { e.preventDefault(); move(e); }, { passive: false });
-    gameBox.addEventListener('mousemove', move);
-  }
-
-  function endGame() {
-    running = false;
-    clearTimeout(spawnTimer); clearInterval(countdownTimer); cancelAnimationFrame(animFrame);
-    gameBox.querySelectorAll('.ball, .game-hud, .floating-point, .spark').forEach(el => el.remove());
-    if (bin) bin.remove(); activeBalls = 0;
-    const finalScore = score;
-    const currentRecord = parseInt(localStorage.getItem('gameRecord') || '0');
-    const isNewRecord = finalScore > currentRecord;
-    if (isNewRecord) localStorage.setItem('gameRecord', finalScore);
-    let message = '';
-    if (finalScore >= 25) message = 'Ты настоящий лидер! 🏆';
-    else if (finalScore >= 15) message = 'Отличный результат! 💪';
-    else if (finalScore >= 8) message = 'Хорошо, но можно лучше! 👍';
-    else message = 'Попробуй ещё раз! 🚀';
-    const over = document.createElement('div');
-    over.className = 'game-over';
-    over.innerHTML = `<h3>Время вышло!</h3><div class="final-score">${finalScore}</div><p>${message}</p>${isNewRecord ? '<div class="record">🏆 Новый рекорд!</div>' : `<div class="record">Рекорд: ${Math.max(currentRecord, finalScore)}</div>`}<button class="btn" id="restartBtn" style="margin-top: 14px;">🔄 Играть снова</button>`;
-    gameBox.appendChild(over);
-    document.getElementById('restartBtn').addEventListener('click', () => { over.remove(); startGame(); });
-  }
-  startBtn.addEventListener('click', startGame);
 </script>
 
 </body>
