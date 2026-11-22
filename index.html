@@ -3,548 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ОРБИТА — Школьная республика</title>
+<title>ОРБИТА — Школьная республика МАОУ «СОШ №5»</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #030612;
-    --bg-2: #060b1a;
-    --card: #0a1124;
-    --card-2: #101a36;
-    --line: #1a2747;
-    --line-2: #263963;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --muted-2: #64748b;
-    --cyan: #38bdf8;
-    --cyan-glow: #0ea5e9;
-    --orange: #f97316;
-    --orange-glow: #ea580c;
+    --bg: #0b1220;
+    --bg-elevated: #111a2e;
+    --bg-card: #152238;
+    --white: #f4f7fb;
+    --gov-blue: #0a2540;
+    --gov-blue-light: #1a3c61;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-glow: rgba(59, 130, 246, 0.35);
+    --text-main: #e8eef7;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.18);
+    --border-strong: rgba(148, 163, 184, 0.28);
+    --space-dark: #060b16;
+    --star-color: rgba(255, 255, 255, 0.55);
+    --orbit-ring: rgba(59, 130, 246, 0.25);
   }
-  
+
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Manrope', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
+    color: var(--text-main);
+    line-height: 1.65;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    position: relative;
   }
 
-  /* ===== КОСМИЧЕСКИЙ ФОН ===== */
-  .space-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    background: 
-      radial-gradient(circle at 15% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 40%),
-      radial-gradient(circle at 85% 70%, rgba(249, 115, 22, 0.1) 0%, transparent 40%),
-      radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.2) 0%, transparent 60%);
-  }
-
-  /* Звёзды (3 слоя) */
-  .stars-layer {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-                      radial-gradient(2px 2px at 40px 70px, #fff, transparent),
-                      radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-                      radial-gradient(1px 1px at 160px 120px, #fff, transparent),
-                      radial-gradient(2px 2px at 250px 60px, #fff, transparent);
-    background-repeat: repeat;
-    background-size: 300px 300px;
-  }
-  .stars-1 { opacity: 0.6; animation: twinkle 4s infinite alternate; }
-  .stars-2 { 
-    background-size: 500px 500px; 
-    background-position: 100px 100px; 
-    opacity: 0.4; 
-    animation: twinkle 6s infinite alternate-reverse;
-  }
-  .stars-3 { 
-    background-size: 700px 700px; 
-    background-position: 200px 300px; 
-    opacity: 0.2; 
-    animation: twinkle 8s infinite alternate;
-  }
-  @keyframes twinkle {
-    0% { opacity: 0.2; }
-    100% { opacity: 0.7; }
-  }
-
-  /* Солнце/звезда */
-  .sun {
-    position: absolute;
-    top: -150px;
-    right: -100px;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fff 0%, #38bdf8 20%, rgba(14, 165, 233, 0.3) 50%, transparent 80%);
-    box-shadow: 0 0 100px 50px rgba(56, 189, 248, 0.4);
-    opacity: 0.6;
-    animation: sun-pulse 8s infinite alternate;
-  }
-  @keyframes sun-pulse {
-    0% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 100px 50px rgba(56, 189, 248, 0.3); }
-    100% { transform: scale(1.1); opacity: 0.8; box-shadow: 0 0 150px 80px rgba(56, 189, 248, 0.5); }
-  }
-
-  /* Планеты с орбитами */
-  .planet {
-    position: absolute;
-    border-radius: 50%;
-    background-size: cover;
-    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8);
-  }
-  .planet-1 {
-    top: 15%;
-    left: 5%;
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #f97316, #7c2d12);
-    box-shadow: 0 0 40px rgba(249, 115, 22, 0.4), inset -15px -15px 30px rgba(0,0,0,0.7);
-    animation: float 20s ease-in-out infinite;
-  }
-  .planet-2 {
-    top: 40%;
-    right: 8%;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #38bdf8, #1e3a8a);
-    box-shadow: 0 0 30px rgba(56, 189, 248, 0.4), inset -10px -10px 20px rgba(0,0,0,0.7);
-    animation: float 25s ease-in-out infinite reverse;
-  }
-  .planet-3 {
-    top: 70%;
-    left: 15%;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #94a3b8, #334155);
-    box-shadow: inset -8px -8px 15px rgba(0,0,0,0.8);
-    animation: float 18s ease-in-out infinite;
-  }
-  .planet-4 {
-    top: 85%;
-    right: 20%;
-    width: 150px;
-    height: 150px;
-    background: linear-gradient(135deg, #a855f7, #4c1d95);
-    box-shadow: 0 0 50px rgba(168, 85, 247, 0.3), inset -20px -20px 40px rgba(0,0,0,0.7);
-    animation: float 30s ease-in-out infinite reverse;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(-15px, -25px); }
-    66% { transform: translate(10px, 15px); }
-  }
-
-  /* Орбитальные кольца */
-  .orbit {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(56, 189, 248, 0.1);
-    pointer-events: none;
-  }
-  .orbit-1 {
-    top: 5%; right: -10%; width: 600px; height: 600px;
-    animation: spin 60s linear infinite;
-  }
-  .orbit-2 {
-    top: 50%; left: -20%; width: 800px; height: 800px;
-    border-color: rgba(249, 115, 22, 0.08);
-    animation: spin 90s linear infinite reverse;
-  }
-  .orbit::before {
-    content: ''; position: absolute; top: 0; left: 50%; width: 6px; height: 6px;
-    background: var(--cyan); border-radius: 50%; box-shadow: 0 0 10px var(--cyan);
-    transform: translateX(-50%);
-  }
-  .orbit-2::before { background: var(--orange); box-shadow: 0 0 10px var(--orange); }
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-
-  /* Контент поверх фона */
   a { color: inherit; text-decoration: none; }
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
-  /* HEADER */
+  /* ========== HEADER ========== */
   header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(3,6,18,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
+    background: rgba(11, 18, 32, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
   }
   .nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 24px; max-width: 1140px; margin: 0 auto;
+    padding: 14px 24px; max-width: 1180px; margin: 0 auto;
   }
-  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
   .logo-mark {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--cyan), var(--cyan-glow));
+    width: 46px; height: 46px;
+    background: linear-gradient(145deg, #1e3a5f, #0a2540);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-    flex-shrink: 0; color: var(--bg);
+    color: #93c5fd;
+    box-shadow: 0 0 20px var(--accent-glow);
   }
-  .logo-mark svg { width: 22px; height: 22px; }
+  .logo-mark svg { width: 26px; height: 26px; }
   .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
-  .logo-text b { font-family: 'Unbounded'; font-size: 14px; font-weight: 800; color: #fff; }
-  .logo-text span { font-size: 10px; color: var(--cyan); font-weight: 600; letter-spacing: 1px; }
+  .logo-text b {
+    font-family: 'Montserrat'; font-size: 17px; font-weight: 800;
+    color: var(--white); text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  .logo-text span {
+    font-size: 11px; color: var(--text-muted); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
 
   .menu-btn {
-    width: 46px; height: 46px; border-radius: 50%;
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all .25s; gap: 4px;
+    cursor: pointer; transition: all .25s; gap: 5px;
   }
-  .menu-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--cyan); }
-  .menu-btn .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); }
+  .menu-btn:hover { background: var(--bg-elevated); border-color: var(--accent); }
+  .menu-btn .dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
 
-  /* SIDE MENU */
+  /* ========== SIDE MENU ========== */
   .side-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    position: fixed; inset: 0; background: rgba(6, 11, 22, 0.75);
     opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 150;
   }
   .side-overlay.open { opacity: 1; pointer-events: auto; }
   .side-menu {
-    position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 92vw;
-    background: linear-gradient(170deg, var(--card-2) 0%, var(--bg) 100%);
-    border-left: 1px solid var(--line-2); z-index: 200;
-    transform: translateX(100%); transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex; flex-direction: column; box-shadow: -20px 0 80px rgba(0,0,0,0.8);
+    position: fixed; top: 0; right: 0; bottom: 0; width: 360px; max-width: 90vw;
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--border); z-index: 200;
+    transform: translateX(100%); transition: transform .4s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex; flex-direction: column;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.4);
     overflow-y: auto;
   }
   .side-menu.open { transform: translateX(0); }
   .side-head {
-    padding: 26px 28px 22px; display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 24px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
-  .side-title { font-family: 'Unbounded'; font-size: 16px; font-weight: 800; }
-  .side-subtitle { font-size: 11px; color: var(--cyan); font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; }
+  .side-title { font-family: 'Montserrat'; font-size: 17px; font-weight: 700; color: var(--white); }
   .side-close {
-    width: 36px; height: 36px; border-radius: 50%; background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--cyan); font-size: 20px; transition: all .25s;
+    width: 36px; height: 36px; background: transparent;
+    border: 1px solid var(--border); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-main); font-size: 22px; transition: all .2s;
   }
-  .side-close:hover { background: rgba(56, 189, 248, 0.2); transform: rotate(90deg); }
-  .side-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--line-2), transparent); margin: 0 28px; }
-  .side-nav { padding: 16px 16px 30px; list-style: none; }
-  .side-nav li { margin-bottom: 2px; }
+  .side-close:hover { background: var(--bg-card); border-color: var(--accent); }
+  .side-nav { padding: 12px 0; list-style: none; }
+  .side-nav li { border-bottom: 1px solid rgba(255,255,255,0.04); }
   .side-nav a {
-    display: flex; align-items: center; gap: 14px; padding: 14px 16px;
-    font-size: 15px; color: var(--muted); font-weight: 600; border-radius: 12px; transition: all .25s;
+    display: block; padding: 16px 24px;
+    font-size: 15px; color: var(--text-main); font-weight: 500; transition: all .2s;
   }
-  .side-nav .ico-nav {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(14, 165, 233, 0.05));
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;
-  }
-  .side-nav .ico-nav svg { width: 17px; height: 17px; }
-  .side-nav a:hover { background: rgba(56, 189, 248, 0.08); color: #fff; transform: translateX(4px); }
-  .side-nav .label { flex: 1; }
+  .side-nav a:hover { background: rgba(59, 130, 246, 0.08); color: #93c5fd; padding-left: 30px; }
   .side-foot {
-    margin-top: auto; padding: 22px 28px 26px; border-top: 1px solid var(--line); text-align: center;
+    margin-top: auto; padding: 22px 24px; border-top: 1px solid var(--border);
+    text-align: center; font-size: 12px; color: var(--text-muted); background: var(--bg);
   }
-  .side-slogan { font-family: 'Caveat'; font-size: 22px; font-weight: 700; color: var(--orange); transform: rotate(-2deg); margin-bottom: 10px; }
-  .side-copy { font-size: 11px; color: var(--muted-2); }
 
-  /* HERO */
+  /* ========== HERO ========== */
   .hero {
-    position: relative; z-index: 2; overflow: hidden; border-bottom: 1px solid var(--line);
+    position: relative; z-index: 2; overflow: hidden;
+    background: radial-gradient(ellipse 120% 80% at 50% -20%, #1a3a6e 0%, var(--space-dark) 55%);
+    border-bottom: 1px solid var(--border);
   }
-  .hero-content { padding: 100px 0 70px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px 10px 14px;
-    background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 30px; margin-bottom: 28px; backdrop-filter: blur(10px);
+  .hero-stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, var(--star-color), transparent),
+      radial-gradient(1px 1px at 25% 60%, var(--star-color), transparent),
+      radial-gradient(1.2px 1.2px at 40% 15%, var(--star-color), transparent),
+      radial-gradient(1px 1px at 55% 75%, var(--star-color), transparent),
+      radial-gradient(1.5px 1.5px at 70% 30%, var(--star-color), transparent),
+      radial-gradient(1px 1px at 85% 55%, var(--star-color), transparent),
+      radial-gradient(1.2px 1.2px at 15% 85%, var(--star-color), transparent),
+      radial-gradient(1px 1px at 90% 10%, var(--star-color), transparent);
+    background-size: 100% 100%;
+    opacity: 0.7;
+    animation: twinkle 8s ease-in-out infinite alternate;
   }
-  .hero-badge .badge-ico {
-    width: 32px; height: 32px; border-radius: 50%; background: var(--cyan);
-    display: flex; align-items: center; justify-content: center; color: var(--bg);
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    100% { opacity: 0.85; }
   }
-  .hero-badge .badge-text b { font-family: 'Unbounded'; font-size: 12px; font-weight: 800; color: var(--cyan); display: block; }
-  .hero-badge .badge-text span { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .hero-orbit {
+    position: absolute;
+    width: 520px; height: 520px;
+    border: 1px solid var(--orbit-ring);
+    border-radius: 50%;
+    top: 50%; right: -80px;
+    transform: translateY(-50%);
+    opacity: 0.5;
+  }
+  .hero-orbit::before {
+    content: '';
+    position: absolute;
+    width: 380px; height: 380px;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-orbit::after {
+    content: '';
+    position: absolute;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 18px var(--accent);
+  }
 
-  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 3px;
-    color: var(--orange); text-transform: uppercase; margin-bottom: 20px; font-weight: 800;
+  .hero-content { padding: 90px 0 100px; position: relative; z-index: 3; }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Montserrat'; font-size: 11px; font-weight: 700;
+    color: #93c5fd; background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 7px 14px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 28px;
   }
-  .hero-tag::before { content: ''; width: 20px; height: 2px; background: var(--orange); box-shadow: 0 0 10px var(--orange); }
-  
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; background: var(--accent);
+    border-radius: 50%; box-shadow: 0 0 8px var(--accent);
+  }
+
   .hero h1 {
-    font-family: 'Unbounded'; font-size: clamp(38px, 7vw, 76px); font-weight: 900; line-height: 1;
-    letter-spacing: -2px; color: #fff; margin-bottom: 24px; text-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
-    white-space: nowrap;
+    font-family: 'Montserrat'; font-size: clamp(34px, 5vw, 52px);
+    font-weight: 800; line-height: 1.12; color: var(--white); margin-bottom: 18px;
+    letter-spacing: -0.8px;
   }
   .hero h1 .accent {
-    background: linear-gradient(135deg, var(--cyan), var(--cyan-glow));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    background: linear-gradient(120deg, #60a5fa, #93c5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
+
   .hero-slogan {
-    font-family: 'Unbounded'; font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
-    color: #fff; margin-bottom: 24px; line-height: 1.3;
+    font-size: 18px; font-weight: 500; color: #94a3b8;
+    margin-bottom: 22px; border-left: 3px solid var(--accent);
+    padding-left: 16px; letter-spacing: 0.2px;
   }
-  .hero p { font-size: 16px; color: var(--muted); max-width: 480px; margin-bottom: 32px; line-height: 1.8; }
-  .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-  
+  .hero p {
+    font-size: 15.5px; color: var(--text-muted); max-width: 480px;
+    margin-bottom: 40px; line-height: 1.7;
+  }
+
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: var(--orange); color: #fff; font-family: 'Manrope'; font-weight: 800;
-    padding: 14px 28px; border-radius: 8px; font-size: 15px; border: none; cursor: pointer;
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.4); transition: transform .2s, box-shadow .25s;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent); color: #fff; font-family: 'Inter'; font-weight: 600;
+    padding: 14px 28px; font-size: 14px; border: none; cursor: pointer;
+    border-radius: 10px; transition: all .25s;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    box-shadow: 0 4px 20px var(--accent-glow);
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(249, 115, 22, 0.6); }
+  .btn:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 28px var(--accent-glow); }
   .btn-outline {
-    background: transparent; border: 1.5px solid var(--cyan); color: var(--cyan); box-shadow: none;
+    background: transparent; border: 1.5px solid rgba(59, 130, 246, 0.5); color: #93c5fd;
+    box-shadow: none;
   }
-  .btn-outline:hover { background: rgba(56, 189, 248, 0.1); box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+  .btn-outline:hover { background: rgba(59, 130, 246, 0.12); border-color: var(--accent); color: #fff; }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 
   .hero-photo {
-    position: relative; aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden;
-    background: var(--card); border: 1px solid var(--line-2);
-    box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04);
   }
-  .hero-photo::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, var(--bg) 0%, transparent 40%);
+  .hero-photo::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(6,11,22,0.7) 100%);
+    z-index: 1; pointer-events: none;
   }
-  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* SECTIONS */
-  .section { padding: 90px 0; position: relative; z-index: 2; border-top: 1px solid var(--line); }
+  /* ========== SECTIONS ========== */
+  .section { padding: 88px 0; position: relative; }
+  .section.alt { background: var(--bg-elevated); }
+
+  .section-header {
+    margin-bottom: 48px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
   .section-label {
-    font-family: 'Unbounded'; font-size: 11px; font-weight: 800; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--cyan); margin-bottom: 14px;
-    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Montserrat'; font-size: 12px; font-weight: 700;
+    color: var(--accent); text-transform: uppercase; letter-spacing: 1.8px;
   }
-  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
-  .section-heading {
-    font-family: 'Unbounded'; font-size: clamp(26px, 4vw, 40px); font-weight: 800;
-    letter-spacing: -1px; margin-bottom: 16px; color: #fff;
+  .section-title {
+    font-family: 'Montserrat'; font-size: 30px; font-weight: 700;
+    color: var(--white); letter-spacing: -0.4px;
   }
-  .section-sub { color: var(--muted); font-size: 16px; margin-bottom: 46px; max-width: 620px; }
+  .section-sub { color: var(--text-muted); font-size: 15px; max-width: 520px; }
 
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 1.2fr 0.85fr; gap: 32px; }
-  .info-list { list-style: none; }
-  .info-list li {
-    display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--line);
+  /* ========== ABOUT ========== */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .about-card {
+    background: var(--bg-card);
+    padding: 32px; border: 1px solid var(--border);
+    border-radius: 14px;
+    position: relative; overflow: hidden;
   }
-  .info-list li:last-child { border-bottom: none; }
-  .info-list .ico {
-    width: 44px; height: 44px; border-radius: 12px; background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.2); display: flex; align-items: center; justify-content: center;
-    color: var(--cyan); flex-shrink: 0;
+  .about-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
   }
-  .info-list .ico svg { width: 20px; height: 20px; }
-  .info-list b { display: block; font-size: 11px; color: var(--muted-2); font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
-  .info-list span { font-size: 15px; color: #fff; font-weight: 600; }
-  .about-text h3 { font-family: 'Unbounded'; font-size: 20px; font-weight: 800; margin-bottom: 18px; color: #fff; }
-  .about-text p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .about-card h3 {
+    font-family: 'Montserrat'; font-size: 18px; margin-bottom: 14px;
+    color: var(--white); font-weight: 700;
+  }
+  .about-card p { color: var(--text-muted); font-size: 14.5px; margin-bottom: 14px; line-height: 1.7; }
+  .info-list { list-style: none; display: grid; gap: 14px; margin-top: 8px; }
+  .info-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; }
+  .info-list li b { color: #cbd5e1; min-width: 110px; font-weight: 600; }
+  .info-list li span { color: var(--text-muted); }
 
-  .side-photo {
-    position: relative; border-radius: 20px; overflow: hidden; background: var(--card);
-    border: 1px solid var(--line-2); min-height: 420px; display: flex; align-items: center; justify-content: center;
-  }
-  .side-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0.8; }
-  .side-photo-hand {
-    position: absolute; bottom: 24px; right: 24px; font-family: 'Caveat'; font-size: 26px; font-weight: 700;
-    color: #fff; transform: rotate(-4deg); text-align: right; line-height: 1.05; z-index: 3;
-  }
-  .side-photo-hand::after {
-    content: ''; display: block; width: 100%; height: 2px; background: var(--cyan); margin-top: 4px;
-  }
-
-  /* VALUES */
-  .values-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
-  .value-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px 22px;
-    transition: all .3s; backdrop-filter: blur(5px);
-  }
-  .value-card:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1); }
-  .value-card .ico {
-    width: 48px; height: 48px; border-radius: 12px; background: rgba(56, 189, 248, 0.1);
-    display: flex; align-items: center; justify-content: center; color: var(--cyan); margin-bottom: 18px;
-  }
-  .value-card .ico svg { width: 24px; height: 24px; }
-  .value-card h4 { font-family: 'Unbounded'; font-size: 15px; font-weight: 800; margin-bottom: 10px; color: #fff; }
-  .value-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-  /* GOVERNMENT */
-  .gov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  /* ========== GOVERNMENT ========== */
+  .gov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
   .gov-card {
-    background: linear-gradient(160deg, var(--card), var(--bg-2)); border: 1px solid var(--line-2);
-    border-radius: 20px; padding: 30px; position: relative; overflow: hidden; transition: all .3s;
-    backdrop-filter: blur(5px);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: border-color .25s, transform .25s;
   }
-  .gov-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    background: linear-gradient(180deg, var(--cyan), var(--orange)); opacity: 0.8;
+  .gov-card:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+
+  .gov-card-header {
+    padding: 20px 22px;
+    background: linear-gradient(135deg, #1a3558, #0f243d);
+    color: #fff;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 1px solid var(--border);
   }
-  .gov-card:hover { border-color: var(--cyan); box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: translateY(-3px); }
-  .gov-card h3 {
-    font-family: 'Unbounded'; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; margin-top: 10px;
+  .gov-card-header.vacant {
+    background: linear-gradient(135deg, #2a3344, #1c2433);
   }
-  .gov-head {
-    display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--cyan);
-    background: rgba(56, 189, 248, 0.1); padding: 6px 12px; border-radius: 20px; margin-bottom: 20px;
+  .gov-photo {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 2px solid rgba(147, 197, 253, 0.4);
+    background: #1e293b; object-fit: cover; flex-shrink: 0;
   }
-  .gov-head.vacant { color: var(--muted); background: rgba(255,255,255,0.05); }
-  .gov-head.vacant .dot { background: var(--muted); }
-  .gov-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
-  .gov-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .gov-title-wrap { display: flex; flex-direction: column; }
+  .gov-post {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    opacity: 0.75; font-weight: 600; color: #93c5fd;
+  }
+  .gov-name {
+    font-family: 'Montserrat'; font-size: 17px; font-weight: 700;
+    line-height: 1.25; margin-top: 3px; color: var(--white);
+  }
+
+  .gov-card-body { padding: 22px; flex: 1; }
+  .gov-center-name {
+    font-family: 'Montserrat'; font-size: 15px; font-weight: 700;
+    color: #93c5fd; margin-bottom: 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 12px;
+  }
+  .gov-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
   .gov-list li {
-    font-size: 13.5px; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+    font-size: 13.5px; color: var(--text-muted);
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.45;
   }
   .gov-list li::before {
-    content: '•'; color: var(--orange); font-size: 18px; line-height: 1;
+    content: '';
+    width: 5px; height: 5px; background: var(--accent);
+    border-radius: 50%; margin-top: 6px; flex-shrink: 0;
+    box-shadow: 0 0 6px var(--accent);
   }
 
-  /* FAQ */
-  .faq-list { max-width: 800px; }
-  .faq-item {
-    border: 1px solid var(--line); border-radius: 16px; margin-bottom: 12px; overflow: hidden;
-    background: var(--card); backdrop-filter: blur(5px);
+  /* ========== VOTE ========== */
+  .vote-section { padding: 90px 0; position: relative; z-index: 2; }
+  .vote-box {
+    max-width: 540px; margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 44px 40px; text-align: center;
+    position: relative; overflow: hidden;
   }
-  .faq-item.open { border-color: var(--cyan); }
-  .faq-q {
-    padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; font-weight: 700; font-size: 16px; gap: 16px; color: #fff;
-  }
-  .faq-q:hover, .faq-item.open .faq-q { color: var(--cyan); }
-  .faq-toggle {
-    width: 30px; height: 30px; border-radius: 50%; background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center;
-    color: var(--cyan); font-weight: 800; font-size: 18px; flex-shrink: 0; transition: transform .3s;
-  }
-  .faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--cyan); color: var(--bg); }
-  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; color: var(--muted); font-size: 15px; }
-  .faq-a-inner { padding: 0 24px 24px; }
-  .faq-item.open .faq-a { max-height: 300px; }
-
-  /* VOTE */
-  .vote-section {
-    padding: 90px 0; border-top: 1px solid var(--line); position: relative; z-index: 2;
-  }
-  .vote-inner {
-    max-width: 640px; margin: 0 auto; text-align: center; background: rgba(10, 17, 36, 0.8);
-    border: 1px solid var(--line-2); border-radius: 28px; padding: 50px 30px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5); position: relative; overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-  .vote-inner::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  .vote-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
   }
   .vote-title {
-    font-family: 'Unbounded'; font-size: clamp(26px, 4vw, 38px); font-weight: 900;
-    margin-bottom: 14px; color: #fff; line-height: 1.15;
+    font-family: 'Montserrat'; font-size: 26px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
   }
-  .vote-sub { color: var(--muted); font-size: 15px; margin-bottom: 30px; }
+  .vote-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 14.5px; }
   .vote-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    background: var(--orange); color: #fff; font-family: 'Unbounded'; font-weight: 900;
-    font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 60px;
-    border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
-    transition: all .2s; margin-bottom: 24px; min-width: 200px;
+    background: var(--accent); color: #fff;
+    font-family: 'Montserrat'; font-weight: 700;
+    font-size: 15px; padding: 16px 48px; border: none; cursor: pointer;
+    border-radius: 10px; transition: all .25s;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 24px; width: 100%; max-width: 280px;
+    box-shadow: 0 4px 24px var(--accent-glow);
   }
-  .vote-btn:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(249, 115, 22, 0.6); }
-  .vote-btn:disabled { cursor: default; opacity: 0.6; }
+  .vote-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+  .vote-btn:disabled { background: #334155; cursor: not-allowed; box-shadow: none; transform: none; }
+
   .vote-counter {
-    display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted);
-    padding: 10px 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 30px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14.5px; color: var(--text-muted); font-weight: 500;
   }
-  .vote-counter b { font-family: 'Unbounded'; font-size: 18px; color: var(--cyan); font-weight: 900; margin: 0 4px; }
-  .vote-counter .pulse-dot {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan);
-    animation: pulse 1.8s infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-  
-  .vote-thanks { display: none; animation: thanksIn .6s cubic-bezier(0.4, 0, 0.2, 1); }
+  .vote-counter b { color: #93c5fd; font-size: 18px; font-weight: 700; }
+
+  .vote-thanks { display: none; }
   .vote-thanks.show { display: block; }
-  @keyframes thanksIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  .vote-thanks img { max-width: 100%; height: auto; max-height: 300px; border-radius: 16px; display: block; margin: 0 auto 20px; }
-  .vote-thanks-text { font-family: 'Unbounded'; font-size: 20px; font-weight: 800; color: var(--cyan); margin-bottom: 6px; }
-
-  /* CTA */
-  .cta-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); z-index: 2; position: relative; }
-  .cta-section h2 { font-family: 'Unbounded'; font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.1; margin-bottom: 22px; color: #fff; }
-  .cta-section h2 .accent { color: var(--orange); }
-  .cta-section .subtitle { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--line); padding: 60px 0 30px;
-    background: rgba(6, 11, 26, 0.8); position: relative; z-index: 2;
-    backdrop-filter: blur(10px);
+  .vote-thanks-text {
+    font-family: 'Montserrat'; font-size: 20px; font-weight: 700;
+    color: var(--white); margin-bottom: 8px;
   }
-  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-  .footer-slogan { font-family: 'Caveat'; font-size: 26px; color: var(--orange); transform: rotate(-2deg); }
-  .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; color: var(--muted-2); }
 
+  /* ========== FAQ ========== */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item {
+    border: 1px solid var(--border); margin-bottom: -1px;
+    background: var(--bg-card); border-radius: 0;
+  }
+  .faq-item:first-child { border-radius: 12px 12px 0 0; }
+  .faq-item:last-child { border-radius: 0 0 12px 12px; margin-bottom: 0; }
+  .faq-q {
+    padding: 20px 22px; font-weight: 600; font-size: 15px; color: var(--white);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    transition: background .2s;
+  }
+  .faq-q:hover { background: rgba(59, 130, 246, 0.06); }
+  .faq-icon {
+    font-size: 20px; font-weight: 400; color: var(--accent);
+    transition: transform .3s; width: 24px; text-align: center;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .35s ease;
+    color: var(--text-muted); font-size: 14.5px;
+  }
+  .faq-a-inner { padding: 0 22px 20px; line-height: 1.7; }
+  .faq-item.open .faq-a { max-height: 220px; }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--space-dark); color: #fff;
+    padding: 56px 0 28px; position: relative; z-index: 2;
+    border-top: 1px solid var(--border);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 36px; margin-bottom: 36px;
+  }
+  .footer-logo { display: flex; flex-direction: column; gap: 6px; }
+  .footer-logo b {
+    font-family: 'Montserrat'; font-size: 22px; font-weight: 800;
+    letter-spacing: 1.5px; color: var(--white);
+  }
+  .footer-logo span { font-size: 13px; color: var(--text-muted); }
+  .footer-info { font-size: 13.5px; color: var(--text-muted); text-align: right; line-height: 1.6; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 22px;
+    text-align: center; font-size: 12.5px; color: #64748b;
+  }
+
+  /* ========== RESPONSIVE ========== */
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-photo { max-width: 320px; margin: 0 auto; aspect-ratio: 3 / 4; }
-    .about-grid { grid-template-columns: 1fr; gap: 30px; }
-    .values-grid { grid-template-columns: 1fr 1fr; }
-    .section { padding: 70px 0; }
-    .planet-1 { width: 80px; height: 80px; }
-    .planet-4 { width: 100px; height: 100px; }
-    .sun { width: 250px; height: 250px; top: -80px; right: -50px; }
+    .hero-photo { max-width: 280px; margin: 0 auto; }
+    .hero-orbit { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 26px; }
+    .footer-inner { flex-direction: column; text-align: center; align-items: center; }
+    .footer-info { text-align: center; }
   }
   @media (max-width: 520px) {
-    .values-grid { grid-template-columns: 1fr; }
-    .hero-buttons { flex-direction: column; align-items: stretch; }
+    .hero h1 { font-size: 30px; }
+    .hero-buttons { flex-direction: column; }
     .btn { width: 100%; }
-    .footer-inner { justify-content: center; text-align: center; }
-    .vote-inner { padding: 40px 20px; }
-    .vote-btn { padding: 16px 40px; font-size: 16px; }
-    .gov-card { padding: 24px; }
-    .hero h1 { font-size: 36px; white-space: normal; }
-    .planet-2, .planet-3 { display: none; }
+    .gov-grid { grid-template-columns: 1fr; }
+    .vote-box { padding: 32px 22px; }
+    .section { padding: 64px 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- КОСМИЧЕСКИЙ ФОН -->
-<div class="space-bg">
-  <div class="sun"></div>
-  <div class="stars-layer stars-1"></div>
-  <div class="stars-layer stars-2"></div>
-  <div class="stars-layer stars-3"></div>
-  <div class="planet planet-1"></div>
-  <div class="planet planet-2"></div>
-  <div class="planet planet-3"></div>
-  <div class="planet planet-4"></div>
-  <div class="orbit orbit-1"></div>
-  <div class="orbit orbit-2"></div>
-</div>
-
 <header>
   <div class="nav">
     <div class="logo">
       <div class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(0)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120)"/>
+        </svg>
       </div>
       <div class="logo-text">
         <b>ОРБИТА</b>
-        <span>ШКОЛЬНАЯ РЕСПУБЛИКА</span>
+        <span>Школьная республика</span>
       </div>
     </div>
-    <button class="menu-btn" id="menuBtn">
+    <button class="menu-btn" id="menuBtn" aria-label="Меню">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </button>
   </div>
@@ -553,51 +488,38 @@
 <div class="side-overlay" id="sideOverlay"></div>
 <aside class="side-menu" id="sideMenu">
   <div class="side-head">
-    <div>
-      <div class="side-title">Навигация</div>
-      <div class="side-subtitle">ОРБИТА</div>
-    </div>
-    <button class="side-close" id="sideClose">×</button>
+    <div class="side-title">Навигация</div>
+    <button class="side-close" id="sideClose" aria-label="Закрыть">&times;</button>
   </div>
-  <div class="side-divider"></div>
   <ul class="side-nav" id="sideNav">
-    <li><a href="#about"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="label">О республике</span></a></li>
-    <li><a href="#values"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5L12 2z"/></svg></span><span class="label">Ценности</span></a></li>
-    <li><a href="#government"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span><span class="label">Правительство</span></a></li>
-    <li><a href="#faq"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></span><span class="label">Вопросы</span></a></li>
-    <li><a href="#vote"><span class="ico-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="label">Вступить</span></a></li>
+    <li><a href="#about">О республике</a></li>
+    <li><a href="#government">Правительство</a></li>
+    <li><a href="#faq">Частые вопросы</a></li>
+    <li><a href="#vote">Вступить в ОРБИТУ</a></li>
   </ul>
   <div class="side-foot">
-    <div class="side-slogan">Вместе на одной орбите!</div>
-    <div class="side-copy">© 2026 ОРБИТА</div>
+    © 2026 ОРБИТА · МАОУ «СОШ №5»
   </div>
 </aside>
 
 <section class="hero">
+  <div class="hero-stars"></div>
+  <div class="hero-orbit"></div>
   <div class="hero-content">
     <div class="container">
-      <div class="hero-badge">
-        <div class="badge-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg>
-        </div>
-        <div class="badge-text">
-          <b>МАОУ «СОШ №5»</b>
-          <span>Ученическое самоуправление</span>
-        </div>
-      </div>
       <div class="hero-grid">
         <div>
-          <div class="hero-tag">Добро пожаловать в ОРБИТУ</div>
-          <h1>ОРБ<span class="accent">ИТА</span></h1>
-          <div class="hero-slogan">«Вместе на одной орбите»</div>
-          <p>ОРБИТА — это школьная республика, где каждый ученик может предложить идею, найти команду и воплотить её в жизнь. Мы объединяем ребят, чтобы делать школу лучше.</p>
+          <div class="hero-badge">Официальный портал</div>
+          <h1>Школьная республика<br><span class="accent">ОРБИТА</span></h1>
+          <div class="hero-slogan">Вместе на одной орбите</div>
+          <p>Орган ученического самоуправления Муниципального автономного общеобразовательного учреждения «Средняя общеобразовательная школа №5».</p>
           <div class="hero-buttons">
-            <a href="#government" class="btn">Наше правительство</a>
+            <a href="#government" class="btn">Состав правительства</a>
             <a href="#vote" class="btn btn-outline">Вступить в ОРБИТУ</a>
           </div>
         </div>
         <div class="hero-photo">
-          <img src="artem.png" alt="ОРБИТА">
+          <img src="hero_bg.jpg" alt="ОРБИТА" onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80'">
         </div>
       </div>
     </div>
@@ -606,160 +528,188 @@
 
 <section class="section" id="about">
   <div class="container">
-    <div class="section-label">О республике</div>
-    <h2 class="section-heading">Немного об ОРБИТЕ</h2>
-    <p class="section-sub">Коротко о том, кто мы и чем живём.</p>
+    <div class="section-header">
+      <span class="section-label">О проекте</span>
+      <h2 class="section-title">Общая информация</h2>
+      <p class="section-sub">Основные сведения о школьной республике и её миссии</p>
+    </div>
     <div class="about-grid">
-      <div>
-        <ul class="info-list">
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><b>Основана</b><span>2026 год</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><b>Состав</b><span>Актив учеников 5–11 классов</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5L12 2z"/></svg></div><div><b>Направления</b><span>Мероприятия, творчество, спорт, медиа</span></div></li>
-          <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><div><b>Девиз</b><span>Вместе на одной орбите</span></div></li>
-        </ul>
-      </div>
-      <div class="about-text">
-        <h3>Кто мы?</h3>
-        <p>ОРБИТА — это объединение ребят, которым не всё равно. Мы собираем идеи учеников, помогаем им находить команду и вместе превращаем задумки в реальные школьные события.</p>
+      <div class="about-card">
+        <h3>Цели и задачи</h3>
+        <p>ОРБИТА — объединение учащихся, созданное для представления интересов учеников, развития инициативы и вовлечения в управление школьной жизнью.</p>
         <p>Мы верим, что школа — это не только уроки, но и место, где можно творить, дружить и расти.</p>
       </div>
-      <div class="side-photo">
-        <img src="artem.png" alt="ОРБИТА">
-        <div class="side-photo-hand">Твоя идея<br>меняет<br>орбиту…</div>
+      <div class="about-card">
+        <h3>Ключевые сведения</h3>
+        <ul class="info-list">
+          <li><b>Дата основания</b> <span>2026 год</span></li>
+          <li><b>Состав</b> <span>Актив учеников 5–11 классов</span></li>
+          <li><b>Направления</b> <span>Мероприятия, творчество, спорт, медиа</span></li>
+          <li><b>Девиз</b> <span>Вместе на одной орбите</span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="values">
+<section class="section alt" id="government">
   <div class="container">
-    <div class="section-label">Ценности</div>
-    <h2 class="section-heading">Наши принципы</h2>
-    <p class="section-sub">Пять основ, на которых держится ОРБИТА.</p>
-    <div class="values-grid">
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>Уважение</h4><p>К каждому ученику, независимо от мнения.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></div><h4>Развитие</h4><p>Больше возможностей для учёбы и спорта.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Справедливость</h4><p>Равные условия и открытый диалог.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>Команда</h4><p>Решать задачи вместе — значит добиваться большего.</p></div>
-      <div class="value-card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg></div><h4>Современная школа</h4><p>Технологии, комфорт и интересная жизнь.</p></div>
+    <div class="section-header">
+      <span class="section-label">Структура</span>
+      <h2 class="section-title">Кабинет Министров</h2>
+      <p class="section-sub">Структура ученического самоуправления и руководители центров</p>
     </div>
-  </div>
-</section>
-
-<section class="section" id="government">
-  <div class="container">
-    <div class="section-label">Правительство</div>
-    <h2 class="section-heading">Кабинет Министров</h2>
-    <p class="section-sub">Структура самоуправления ОРБИТЫ, центры и их руководители.</p>
     
     <div class="gov-grid">
       
-      <div class="gov-card" style="border-color: var(--orange);">
-        <div class="gov-head" style="color: var(--orange); background: rgba(249, 115, 22, 0.1);">
-          <span class="dot" style="background: var(--orange); box-shadow: 0 0 8px var(--orange);"></span>
-          Вице-президент
+      <div class="gov-card">
+        <div class="gov-card-header">
+          <img src="president_akhtyamov.jpg" class="gov-photo" alt="Ахтямов Артём" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=АА'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Вице-президент</span>
+            <span class="gov-name">Ахтямов Артём</span>
+          </div>
         </div>
-        <h3 style="margin-bottom: 20px;">Ахтямов Артём</h3>
-        <p style="color: var(--muted); font-size: 13.5px;">Высшее должностное лицо школьной республики.</p>
-      </div>
-
-      <div class="gov-card" style="border-color: var(--orange);">
-        <div class="gov-head" style="color: var(--orange); background: rgba(249, 115, 22, 0.1);">
-          <span class="dot" style="background: var(--orange); box-shadow: 0 0 8px var(--orange);"></span>
-          Совет старост
+        <div class="gov-card-body">
+          <div class="gov-center-name">Высшее должностное лицо</div>
+          <ul class="gov-list">
+            <li>Общее руководство деятельностью республики</li>
+            <li>Представление интересов учеников перед администрацией</li>
+            <li>Координация работы центров</li>
+          </ul>
         </div>
-        <h3 style="margin-bottom: 20px;">Климова София</h3>
-        <p style="color: var(--muted); font-size: 13.5px;">Координация работы старост и связь с администрацией.</p>
       </div>
 
       <div class="gov-card">
-        <div class="gov-head">
-          <span class="dot"></span>
-          Руководитель центра
+        <div class="gov-card-header">
+          <img src="soviet_klimova.jpg" class="gov-photo" alt="Климова София" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=КС'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Председатель</span>
+            <span class="gov-name">Климова Софья</span>
+          </div>
         </div>
-        <h3>Центр «Наука и образование»</h3>
-        <p style="color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Ахтямов Артём</p>
-        <ul class="gov-list">
-          <li>Создание условий для учебной деятельности</li>
-          <li>Сбор информации об учебном процессе</li>
-          <li>Организация научного общества учащихся</li>
-          <li>Проверка дневников и учебников</li>
-          <li>Проведение интеллектуального марафона</li>
-        </ul>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Совет старост</div>
+          <ul class="gov-list">
+            <li>Координация работы старост классов</li>
+            <li>Сбор обратной связи от учеников</li>
+            <li>Связь с администрацией школы</li>
+          </ul>
+        </div>
       </div>
 
       <div class="gov-card">
-        <div class="gov-head">
-          <span class="dot"></span>
-          Руководитель центра
+        <div class="gov-card-header">
+          <img src="science_nazarov.jpg" class="gov-photo" alt="Ахтямов Артём" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=НА'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Ахтямов Артём</span>
+          </div>
         </div>
-        <h3>Центр «Труд и порядок»</h3>
-        <p style="color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Кузнецов Павел</p>
-        <ul class="gov-list">
-          <li>Контроль за уборку помещений и территории</li>
-          <li>Распределение классов для дежурства</li>
-          <li>Помощь в обеспечении порядка в классе</li>
-          <li>Проведение субботников</li>
-          <li>Организация пятой трудовой четверти</li>
-          <li>Озеленение школы и классов</li>
-        </ul>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Центр «Наука и образование»</div>
+          <ul class="gov-list">
+            <li>Создание условий для учебной деятельности</li>
+            <li>Сбор информации об учебном процессе</li>
+            <li>Организация научного общества учащихся</li>
+            <li>Проверка дневников и учебников</li>
+            <li>Проведение интеллектуального марафона</li>
+          </ul>
+        </div>
       </div>
 
       <div class="gov-card">
-        <div class="gov-head">
-          <span class="dot"></span>
-          Руководитель центра
+        <div class="gov-card-header">
+          <img src="labor_kuznetsov.jpg" class="gov-photo" alt="Кузнецов Павел" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=КП'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Кузнецов Павел</span>
+          </div>
         </div>
-        <h3>Центр «Забота»</h3>
-        <p style="color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Жуков Артем</p>
-        <ul class="gov-list">
-          <li>Подготовка и проведение акции милосердия</li>
-          <li>Шефская помощь ветеранам ВОВ</li>
-          <li>Организация помощи пожилым людям микрорайона</li>
-        </ul>
-      </div>
-
-      <div class="gov-card" style="opacity: 0.7;">
-        <div class="gov-head vacant">
-          <span class="dot"></span>
-          Вакансия
+        <div class="gov-card-body">
+          <div class="gov-center-name">Центр «Труд и порядок»</div>
+          <ul class="gov-list">
+            <li>Контроль за уборкой помещений и территории</li>
+            <li>Распределение классов для дежурства</li>
+            <li>Помощь в обеспечении порядка в классе</li>
+            <li>Проведение субботников</li>
+            <li>Организация пятой трудовой четверти</li>
+            <li>Озеленение школы и классов</li>
+          </ul>
         </div>
-        <h3>Центр «Здоровье»</h3>
-        <p style="color: var(--muted); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Руководитель не назначен</p>
-        <ul class="gov-list">
-          <li>Проведение спортивно-массовых мероприятий</li>
-          <li>Просветительская работа о вреде привычек</li>
-          <li>Агитация здорового образа жизни</li>
-          <li>Участие в соревнованиях валеологического направления</li>
-        </ul>
       </div>
 
       <div class="gov-card">
-        <div class="gov-head">
-          <span class="dot"></span>
-          Руководитель центра
+        <div class="gov-card-header">
+          <img src="care_zhukov.jpg" class="gov-photo" alt="Жуков Артем" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=ЖА'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Жуков Артем</span>
+          </div>
         </div>
-        <h3>Медиа-центр</h3>
-        <p style="color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Кравченко Константин</p>
-        <ul class="gov-list">
-          <li>Оперативное освещение мероприятий в СМИ</li>
-          <li>Овладение знаниями публицистических жанров</li>
-          <li>Участие в конкурсах и смотрах</li>
-        </ul>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Центр «Забота»</div>
+          <ul class="gov-list">
+            <li>Подготовка и проведение акций милосердия</li>
+            <li>Шефская помощь ветеранам ВОВ</li>
+            <li>Организация помощи пожилым людям микрорайона</li>
+          </ul>
+        </div>
       </div>
 
       <div class="gov-card">
-        <div class="gov-head">
-          <span class="dot"></span>
-          Руководитель центра
+        <div class="gov-card-header vacant">
+          <img src="health_vacant.jpg" class="gov-photo" alt="Вакансия" onerror="this.src='https://via.placeholder.com/64/1e293b/64748b?text=—'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Вакансия</span>
+          </div>
         </div>
-        <h3>Центр «Досуг»</h3>
-        <p style="color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 16px;">Нещеретнов Константин</p>
-        <ul class="gov-list">
-          <li>Организация вечеров отдыха, КТД, фестивалей</li>
-          <li>Проведение праздников и интеллектуальных игр</li>
-          <li>Развитие сотрудничества с внешкольными учреждениями</li>
-        </ul>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Центр «Здоровье»</div>
+          <ul class="gov-list">
+            <li>Проведение спортивно-массовых мероприятий</li>
+            <li>Просветительская работа о вреде привычек</li>
+            <li>Агитация здорового образа жизни</li>
+            <li>Участие в соревнованиях валеологического направления</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card-header">
+          <img src="media_kravchenko.jpg" class="gov-photo" alt="Кравченко Константин" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=КК'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Кравченко Константин</span>
+          </div>
+        </div>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Медиа-центр</div>
+          <ul class="gov-list">
+            <li>Оперативное освещение мероприятий в СМИ</li>
+            <li>Овладение знаниями публицистических жанров</li>
+            <li>Участие в конкурсах и смотрах</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gov-card">
+        <div class="gov-card-header">
+          <img src="leisure_neshcheretnov.jpg" class="gov-photo" alt="Нещеретнов Константин" onerror="this.src='https://via.placeholder.com/64/1e293b/94a3b8?text=НК'">
+          <div class="gov-title-wrap">
+            <span class="gov-post">Руководитель</span>
+            <span class="gov-name">Нещеретнов Константин</span>
+          </div>
+        </div>
+        <div class="gov-card-body">
+          <div class="gov-center-name">Центр «Досуг»</div>
+          <ul class="gov-list">
+            <li>Организация вечеров отдыха, КТД, фестивалей</li>
+            <li>Проведение праздников и интеллектуальных игр</li>
+            <li>Развитие сотрудничества с внешкольными учреждениями</li>
+          </ul>
+        </div>
       </div>
 
     </div>
@@ -768,57 +718,66 @@
 
 <section class="section" id="faq">
   <div class="container">
-    <div class="section-label">Вопросы</div>
-    <h2 class="section-heading">Частые вопросы</h2>
-    <p class="section-sub">Отвечаем на то, что спрашивают чаще всего.</p>
+    <div class="section-header">
+      <span class="section-label">Вопросы</span>
+      <h2 class="section-title">Частые вопросы</h2>
+      <p class="section-sub">Официальные ответы на обращения учащихся</p>
+    </div>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">Как вступить в ОРБИТУ?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Достаточно написать нам или подойти к любому участнику актива. Мы расскажем, какие есть направления, и поможем найти своё.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Кто может стать участником?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Любой ученик 5–11 класса. Опыт не нужен — важно желание делать и идеи.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Что делает ОРБИТА?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Организует мероприятия, ведёт совет старост и собирает идеи учеников через ящик идей.</div></div></div>
-      <div class="faq-item"><div class="faq-q">Как попасть в правительство?<div class="faq-toggle">+</div></div><div class="faq-a"><div class="faq-a-inner">Нужно быть активным участником, предлагать идеи и помогать в организации. Руководители центров выбираются из числа активистов.</div></div></div>
+      <div class="faq-item">
+        <div class="faq-q">Как вступить в ОРБИТУ?<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Достаточно обратиться к любому участнику актива или направить предложение через ящик идей. Мы рассмотрим обращение на ближайшем заседании.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Кто может стать участником?<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Любой учащийся 5–11 классов МАОУ «СОШ №5». Опыт не требуется, важно желание участвовать в школьной жизни.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что делает ОРБИТА?<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Организует мероприятия, ведёт совет старост и собирает идеи учеников через ящик идей, взаимодействует с администрацией.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Как попасть в правительство?<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Необходимо быть активным участником, проявлять инициативу и помогать в организации мероприятий. Руководители центров назначаются из числа активистов.</div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="vote-section" id="vote">
   <div class="container">
-    <div class="vote-inner">
+    <div class="vote-box">
       <div id="voteForm">
-        <h2 class="vote-title">Вступишь в ОРБИТУ?</h2>
-        <p class="vote-sub">Твой голос важен для нас</p>
-        <button class="vote-btn" id="voteBtn">Да, я с вами</button>
-        <br>
+        <h2 class="vote-title">Вступить в ОРБИТУ</h2>
+        <p class="vote-sub">Подтвердите своё участие в ученическом самоуправлении</p>
+        <button class="vote-btn" id="voteBtn">Подтвердить</button>
         <div class="vote-counter">
-          <span class="pulse-dot"></span>
-          Уже с нами: <b id="voteCount">0</b>
+          Всего участников: <b id="voteCount">0</b>
         </div>
       </div>
       <div class="vote-thanks" id="voteThanks">
-        <img src="thanks.png" alt="Спасибо!">
-        <div class="vote-thanks-text">Добро пожаловать в ОРБИТУ!</div>
-        <div class="vote-thanks-sub" style="color: var(--muted); margin-top: 8px;">Всего участников: <b id="voteCountAfter" style="color: var(--orange);">0</b></div>
+        <div class="vote-thanks-text">Заявка принята</div>
+        <div class="vote-sub">Добро пожаловать в ОРБИТУ. Всего участников: <b id="voteCountAfter" style="color:#93c5fd;">0</b></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="cta-section">
-  <div class="container">
-    <h2>Присоединяйся к <span class="accent">ОРБИТЕ!</span></h2>
-    <p class="subtitle">Твоя идея может стать следующим большим проектом нашей республики.</p>
   </div>
 </section>
 
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="logo">
-        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/></svg></div>
-        <div class="logo-text"><b>ОРБИТА</b><span>МАОУ «СОШ №5»</span></div>
+      <div class="footer-logo">
+        <b>ОРБИТА</b>
+        <span>Школьная республика</span>
       </div>
-      <div class="footer-slogan">Вместе на одной орбите!</div>
+      <div class="footer-info">
+        МАОУ «Средняя общеобразовательная школа №5»<br>
+        Официальный портал ученического самоуправления
+      </div>
     </div>
-    <div class="footer-bottom">© 2026 ОРБИТА · Школьная республика · Объединение · Развитие · Будущее</div>
+    <div class="footer-bottom">
+      © 2026 Школьная республика ОРБИТА. Все права защищены.
+    </div>
   </div>
 </footer>
 
@@ -869,7 +828,7 @@
     } catch (e) {
       console.error('Ошибка:', e);
       voteBtn.disabled = false;
-      alert('Ошибка подключения. Проверьте интернет.');
+      alert('Ошибка подключения к базе данных.');
     }
   });
 </script>
@@ -880,14 +839,27 @@
   const sideOverlay = document.getElementById('sideOverlay');
   const sideClose = document.getElementById('sideClose');
   const sideNav = document.getElementById('sideNav');
-  function openMenu() { sideMenu.classList.add('open'); sideOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeMenu() { sideMenu.classList.remove('open'); sideOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+  function openMenu() {
+    sideMenu.classList.add('open');
+    sideOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    sideMenu.classList.remove('open');
+    sideOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   menuBtn.addEventListener('click', () => sideMenu.classList.contains('open') ? closeMenu() : openMenu());
   sideClose.addEventListener('click', closeMenu);
   sideOverlay.addEventListener('click', closeMenu);
   sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('open')));
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
 </script>
 
 </body>
- </html>
+</html>
